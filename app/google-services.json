@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "712153137538",
+    "project_id": "workout-log-6fbc5",
+    "storage_bucket": "workout-log-6fbc5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:712153137538:android:f2c823c1e9389d857acf9b",
+        "android_client_info": {
+          "package_name": "com.example.workoutlog"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBThGekrifJqnFu6jEJGt-P3PpJeMj6ImU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

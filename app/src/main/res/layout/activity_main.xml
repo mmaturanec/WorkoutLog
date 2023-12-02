@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/iwLoginLogo"
+        android:layout_width="224dp"
+        android:layout_height="129dp"
+        android:layout_marginTop="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/tvLoginPrijava"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="@string/prijava"
+        android:textColor="@color/gold"
+        android:textSize="25dp"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iwLoginLogo" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tiLoginUsername"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        app:counterTextColor="@color/white"
+        app:helperTextTextColor="@color/white"
+        app:hintTextColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvLoginPrijava"
+        app:placeholderTextColor="@color/white"
+        app:prefixTextColor="@color/white"
+        app:suffixTextColor="@color/white">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etLoginUserName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/unesiteKorisnickoIme"
+            android:textColor="@color/white"
+            android:textColorHighlight="@color/white"
+            android:textColorLink="@color/white" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tiLoginLozinka"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        app:counterTextColor="@color/white"
+        app:helperTextTextColor="@color/white"
+        app:hintTextColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tiLoginUsername"
+        app:placeholderTextColor="@color/white"
+        app:prefixTextColor="@color/white"
+        app:suffixTextColor="@color/white">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etLoginLozinka"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/unesiteLozinku"
+            android:textColor="@color/white"
+            android:textColorHighlight="@color/white"
+            android:textColorLink="@color/white" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="168dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="152dp"
+        android:backgroundTint="@color/gold"
+        android:text="@string/prijava"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tiLoginLozinka" />
+
+    <TextView
+        android:id="@+id/tvLoginRegistriraj"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="52dp"
+        android:text="@string/registrirajSe"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvLoginNKR"
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintVertical_bias="0.505" />
+
+    <TextView
+        android:id="@+id/tvLoginNKR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="52dp"
+        android:text="@string/nemateKorRac"
+        android:textColor="@color/gold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintVertical_bias="0.505" />
+</androidx.constraintlayout.widget.ConstraintLayout>

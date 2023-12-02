@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Workout Log</string>
+    <string name="prijava">Prijava</string>
+    <string name="unesiteKorisnickoIme">Unesite korisničko ime</string>
+    <string name="unesiteLozinku">Unesite lozinku</string>
+    <string name="nemateKorRac">Nemate korisnički račun?</string>
+    <string name="registrirajSe">Registrirajte se</string>
+
+</resources>
