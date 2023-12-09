@@ -36,6 +36,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.constraintlayout)
     implementation("com.google.firebase:firebase-database:20.3.0")
+    implementation("com.google.firebase:firebase-auth:22.3.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)

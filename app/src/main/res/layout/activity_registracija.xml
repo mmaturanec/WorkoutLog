@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent"
+    tools:context=".RegistracijaActivity">
 
     <ImageView
-        android:id="@+id/iwLoginLogo"
+        android:id="@+id/iwRegisterLogo"
         android:layout_width="224dp"
         android:layout_height="129dp"
         android:layout_marginTop="80dp"
@@ -18,20 +18,20 @@
         app:srcCompat="@drawable/logo" />
 
     <TextView
-        android:id="@+id/tvLoginPrijava"
+        android:id="@+id/tvRegisterRegistracija"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="@string/prijava"
+        android:text="@string/registracija"
         android:textColor="@color/gold"
         android:textSize="25dp"
         android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iwLoginLogo" />
+        app:layout_constraintTop_toBottomOf="@+id/iwRegisterLogo" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tiLoginUsername"
+        android:id="@+id/tiRegisterUsername"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -42,13 +42,13 @@
         app:hintTextColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvLoginPrijava"
+        app:layout_constraintTop_toBottomOf="@+id/tvRegisterRegistracija"
         app:placeholderTextColor="@color/white"
         app:prefixTextColor="@color/white"
         app:suffixTextColor="@color/white">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etLoginUserName"
+            android:id="@+id/etRegisterUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/unesiteKorisnickoIme"
@@ -69,7 +69,7 @@
         app:hintTextColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tiLoginUsername"
+        app:layout_constraintTop_toBottomOf="@+id/tiRegisterUsername"
         app:placeholderTextColor="@color/white"
         app:prefixTextColor="@color/white"
         app:suffixTextColor="@color/white">
@@ -86,42 +86,69 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/btnPrijava"
+        android:id="@+id/btnRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="168dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="124dp"
         android:layout_marginEnd="152dp"
         android:backgroundTint="@color/gold"
-        android:text="@string/prijava"
+        android:text="@string/registracija"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tiRegisterLozinka" />
 
     <TextView
-        android:id="@+id/tvLoginRegistriraj"
+        android:id="@+id/tvRegisterPrijaviSe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="52dp"
-        android:text="@string/registrirajSe"
+        android:layout_marginTop="24dp"
+        android:text="@string/prijava"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvLoginNKR"
-        app:layout_constraintTop_toBottomOf="@+id/btnPrijava"
-        app:layout_constraintVertical_bias="0.505" />
+        app:layout_constraintStart_toEndOf="@+id/tvRegisterPrijava"
+        app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
 
     <TextView
-        android:id="@+id/tvLoginNKR"
+        android:id="@+id/tvRegisterPrijava"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="52dp"
-        android:text="@string/nemateKorRac"
+        android:layout_marginStart="108dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/imatekorisnickiracun"
         android:textColor="@color/gold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnPrijava"
-        app:layout_constraintVertical_bias="0.505" />
+        app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tiPonovnoUnesiteLoz"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:hint="@string/ponovnounesiteLozinku"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        app:counterTextColor="@color/white"
+        app:helperTextTextColor="@color/white"
+        app:hintTextColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tiRegisterLozinka"
+        app:placeholderTextColor="@color/white"
+        app:prefixTextColor="@color/white"
+        app:suffixTextColor="@color/white">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPonovnoUnesiteLozinku"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="hint"
+            android:inputType="textPassword"
+            android:textColor="@color/white"
+            android:textColorHighlight="@color/white"
+            android:textColorLink="@color/white" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
