@@ -38,8 +38,8 @@
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"
-        android:layout_width="409dp"
-        android:layout_height="633dp"
+        android:layout_width="411dp"
+        android:layout_height="651dp"
         app:layout_constraintBottom_toTopOf="@+id/tab_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.25"
@@ -47,14 +47,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
-    <Button
-        android:id="@+id/btnOdjava"
-        android:layout_width="105dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="5dp"
-        android:text="odjava"
+    <ImageView
+        android:id="@+id/ivSettings"
+        android:layout_width="42dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="18dp"
+        app:tint="@color/gold"
         app:layout_constraintBottom_toTopOf="@+id/view_pager"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/settings_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

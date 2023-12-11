@@ -13,6 +13,9 @@
         android:theme="@style/Theme.WorkoutLog"
         tools:targetApi="31">
         <activity
+            android:name=".SettingsActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainMenuActivity"
             android:exported="false" />
         <activity

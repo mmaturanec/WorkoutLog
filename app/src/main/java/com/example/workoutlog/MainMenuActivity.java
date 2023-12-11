@@ -1,12 +1,14 @@
 package com.example.workoutlog;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -16,7 +18,8 @@ public class MainMenuActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager2 viewPager2;
     private MyViewPagerAdapter myViewPagerAdapter;
-    private Button btnOdjava;
+    private ImageView ivSettings;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +29,7 @@ public class MainMenuActivity extends AppCompatActivity {
         viewPager2 = findViewById(R.id.view_pager);
         myViewPagerAdapter = new MyViewPagerAdapter(this);
         viewPager2.setAdapter(myViewPagerAdapter);
-        btnOdjava = findViewById(R.id.btnOdjava);
+        ivSettings = findViewById(R.id.ivSettings);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -52,14 +55,13 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         });
 
-        btnOdjava.setOnClickListener(new View.OnClickListener() {
+        ivSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseAuth mAuth = FirebaseAuth.getInstance();
-                mAuth.signOut();
-                Intent intentPrijava = new Intent(MainMenuActivity.this, MainActivity.class);
-                startActivity(intentPrijava);
+                Intent SettingsIntent = new Intent(MainMenuActivity.this, SettingsActivity.class);
+                startActivity(SettingsIntent);
             }
         });
+
     }
 }
