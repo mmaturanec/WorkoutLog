@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     android:backgroundTint="@color/black"
     tools:context=".MainMenuActivity">
 
@@ -53,10 +54,10 @@
         android:layout_height="31dp"
         android:layout_marginTop="12dp"
         android:layout_marginBottom="18dp"
-        app:tint="@color/gold"
         app:layout_constraintBottom_toTopOf="@+id/view_pager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/settings_icon" />
+        app:srcCompat="@drawable/settings_icon"
+        app:tint="@color/gold" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

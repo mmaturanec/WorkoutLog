@@ -6,4 +6,5 @@
     </style>
 
     <style name="Theme.WorkoutLog" parent="Base.Theme.WorkoutLog" />
+
 </resources>

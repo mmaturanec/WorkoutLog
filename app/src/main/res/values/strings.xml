@@ -17,7 +17,15 @@
     <string name="UnesiteLozinkuOd6Znakova">Lozinka mora imati najmanje 6 znakova!</string>
     <string name="VecPostojiKorisnikSTomEmailAdresom">Već postoji korisnik s tom Email adresom!</string>
     <string name="PogresnoUneseniPodatci">Ne postoji korisnik s unesenim podatcima!</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="SpremljeniTreninzi">Spremljeni treninzi</string>
+    <string name="Dodajnoviprijedlogtreninga">Dodaj novi prijedlog treninga</string>
+    <string name="DodajVjezbu">Dodaj Vježbu</string>
+    <string name="SpremiVjezbu">Spremi Vježbu</string>
+    <string name="UnesiImeVjezbe">Unesi ime vježbe</string>
+    <string name="BrojPonavljanja">Broj ponavljanja</string>
+    <string name="RadnaKilaza">Radna kilaža</string>
+    <string name="DodajSeriju">Dodaj seriju</string>
+    <string name="UkupanBrojSerija">Ukupan broj serija:</string>
+
 
 </resources>

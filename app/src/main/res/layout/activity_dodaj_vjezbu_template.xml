@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".DodajVjezbuTemplate">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tiUnesiImeVjezbe"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="136dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="500dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        app:counterTextColor="@color/white"
+        app:helperTextTextColor="@android:color/white"
+        app:hintTextColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/btnSpremiVjezbuTemplate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:placeholderTextColor="@color/white"
+        app:prefixTextColor="@color/white"
+        app:suffixTextColor="@color/white">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etImeVjezbeTemplate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/UnesiImeVjezbe"
+            android:textColor="@color/white"
+            android:textColorHighlight="@color/white"
+            android:textColorLink="@color/white" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btnSpremiVjezbuTemplate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
+        android:layout_marginEnd="140dp"
+        android:layout_marginBottom="4dp"
+        android:backgroundTint="@color/gold"
+        android:text="@string/SpremiVjezbu"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvDodajVjezbu"
+        android:layout_width="408dp"
+        android:layout_height="398dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnSpremiVjezbuTemplate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnDodajSeriju" />
+
+    <Button
+        android:id="@+id/btnDodajSeriju"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/gold"
+        android:text="@string/DodajSeriju"
+        android:textColor="@color/black"
+        android:textColorHighlight="@color/gold"
+        android:textColorLink="@color/gold"
+        app:layout_constraintBottom_toTopOf="@+id/rvDodajVjezbu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tiUnesiImeVjezbe" />
+
+    <TextView
+        android:id="@+id/tvZaBrojSerija"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/UkupanBrojSerija"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tiUnesiImeVjezbe" />
+
+    <TextView
+        android:id="@+id/tvUkupanBrojSerija"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="24dp"
+        android:text="TextView"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toEndOf="@+id/tvZaBrojSerija"
+        app:layout_constraintTop_toBottomOf="@+id/tiUnesiImeVjezbe" />
+</androidx.constraintlayout.widget.ConstraintLayout>
