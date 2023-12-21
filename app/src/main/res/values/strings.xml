@@ -35,6 +35,10 @@
     <string name="Obrisi">Obriši</string>
     <string name="Odustani">Odustani</string>
     <string name="JesteLiSigurniDaZeliteObrisatiVjezbu">Jeste li sigurni da želite obrisati vježbu?</string>
+    <string name="infoovjezbidialog1">Pritisnite na ikonu: </string>
+    <string name="infoovjezbidialog2">kako bi ste uredili unesenu vježbu. </string>
+    <string name="infoovjezbidialog3">Držite dodir na imenu vježbe kako bi ste ju obrisali.</string>
+
 
 
 </resources>

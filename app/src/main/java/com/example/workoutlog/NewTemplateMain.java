@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class NewTemplateMain extends AppCompatActivity implements NewTemplateMai
     private ArrayList<Exercise> lexercise;
     private Button btnDodajVjezbu;
     private NewTemplateMainAdapter adapterRV;
+    private ImageView ivInfoButtonTemplate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,14 +25,20 @@ public class NewTemplateMain extends AppCompatActivity implements NewTemplateMai
         lexercise = (ArrayList<Exercise>) ExerciseSingleton.getInstance().getExercises();
         btnDodajVjezbu = findViewById(R.id.btnDodajVjezbu);
         RecyclerView recyclerView = findViewById(R.id.rvNewTemplateMain);
-
+        ivInfoButtonTemplate = findViewById(R.id.ivInfoButtonTemplate);
 
         adapterRV = new NewTemplateMainAdapter(this, lexercise, this);
         recyclerView.setAdapter(adapterRV);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
+        ivInfoButtonTemplate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InfoODodavanjuVjezbiDialog.showInfoDialog(NewTemplateMain.this);
 
+            }
+        });
 
         btnDodajVjezbu.setOnClickListener(new View.OnClickListener() {
             @Override
