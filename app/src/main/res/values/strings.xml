@@ -32,6 +32,9 @@
     <string name="tezinaKg">kg</string>
     <string name="Serije">Serije:</string>
     <string name="ImeVjezbe">Ime vježbe:</string>
+    <string name="Obrisi">Obriši</string>
+    <string name="Odustani">Odustani</string>
+    <string name="JesteLiSigurniDaZeliteObrisatiVjezbu">Jeste li sigurni da želite obrisati vježbu?</string>
 
 
 </resources>

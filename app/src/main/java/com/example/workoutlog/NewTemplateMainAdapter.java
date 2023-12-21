@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -50,30 +51,47 @@ public class NewTemplateMainAdapter extends RecyclerView.Adapter<NewTemplateMain
     public int getItemCount() {
         return lexercise.size();
     }
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+    public  class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvSetImeVjezbe;
         RecyclerView innerRecyclerView;
+        ImageView ivEditVjezba;
 
         public MyViewHolder(@NonNull View itemView, NewTemplateMainAdapterInterface recyclerViewInterface) {
             super(itemView);
             tvSetImeVjezbe = itemView.findViewById(R.id.tvSetImeVjezbe);
             innerRecyclerView = itemView.findViewById(R.id.rvSingleVjezbaTemplate);
-            itemView.setOnClickListener(new View.OnClickListener() {
+            ivEditVjezba = itemView.findViewById(R.id.ivEditVjezba);
+
+            ivEditVjezba.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
-                    if(recyclerViewInterface != null)
-                    {
+                public void onClick(View v) {
+                    if (recyclerViewInterface != null) {
                         int pos = getAdapterPosition();
 
-                        if(pos != RecyclerView.NO_POSITION)
-                        {
-                            recyclerViewInterface.onItemClick(pos);
+                        if (pos != RecyclerView.NO_POSITION) {
+                            recyclerViewInterface.onItemClick(pos); // Assuming you have a method for edit click in the interface
                         }
                     }
+                }
+            });
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    if (recyclerViewInterface != null) {
+                        int pos = getAdapterPosition();
+
+                        if (pos != RecyclerView.NO_POSITION) {
+                            recyclerViewInterface.onItemLongclick(pos); // Assuming you have a method for long click deletion in the interface
+                            notifyItemRemoved(pos);
+                            return true; // Return true to indicate the long click has been consumed
+                        }
+                    }
+                    return false; // Return false if the long click action was not handled
                 }
             });
         }
 
     }
+
 }

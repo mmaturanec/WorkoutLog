@@ -8,12 +8,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class NewTemplateMain extends AppCompatActivity implements NewTemplateMainAdapterInterface {
+public class NewTemplateMain extends AppCompatActivity implements NewTemplateMainAdapterInterface, PotvrdiBrisanjeVjezbeDialog.DialogClickListener  {
     private ArrayList<Exercise> lexercise;
     private Button btnDodajVjezbu;
+    private NewTemplateMainAdapter adapterRV;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +24,8 @@ public class NewTemplateMain extends AppCompatActivity implements NewTemplateMai
         btnDodajVjezbu = findViewById(R.id.btnDodajVjezbu);
         RecyclerView recyclerView = findViewById(R.id.rvNewTemplateMain);
 
-        NewTemplateMainAdapter adapterRV = new NewTemplateMainAdapter(this, lexercise, this);
+
+        adapterRV = new NewTemplateMainAdapter(this, lexercise, this);
         recyclerView.setAdapter(adapterRV);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -50,6 +53,25 @@ public class NewTemplateMain extends AppCompatActivity implements NewTemplateMai
         intent.putExtra("position", position);
         startActivity(intent);
         overridePendingTransition(0, 0);
+
+    }
+
+    @Override
+    public void onItemLongclick(final int position) {
+        PotvrdiBrisanjeVjezbeDialog.showDeleteExerciseDialog(this, this, position);
+
+    }
+
+    @Override
+    public void onPositiveButtonClick(int position) {
+        ExerciseSingleton.getInstance().removeAtPosition(position);
+        adapterRV.notifyItemRemoved(position);
+        Toast.makeText(this, "Vježba uspješno obrisana!", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onNegativeButtonClick() {
+        PotvrdiBrisanjeVjezbeDialog.dismissDeleteExerciseDialog();
 
     }
 }
