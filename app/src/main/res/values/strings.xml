@@ -21,11 +21,17 @@
     <string name="Dodajnoviprijedlogtreninga">Dodaj novi prijedlog treninga</string>
     <string name="DodajVjezbu">Dodaj Vježbu</string>
     <string name="SpremiVjezbu">Spremi Vježbu</string>
-    <string name="UnesiImeVjezbe">Unesi ime vježbe</string>
+    <string name="UnesiImeVjezbe">Unesite ime vježbe</string>
     <string name="BrojPonavljanja">Broj ponavljanja</string>
     <string name="RadnaKilaza">Radna kilaža</string>
     <string name="DodajSeriju">Dodaj seriju</string>
     <string name="UkupanBrojSerija">Ukupan broj serija:</string>
+    <string name="UnesiteVrijednostiZaSvakuSeriju">Unesite vrijednosti za svaku seriju!</string>
+    <string name="ShowBrojPonavljanja">Broj ponavljanja: </string>
+    <string name="ShowTezina">Težina: </string>
+    <string name="tezinaKg">kg</string>
+    <string name="Serije">Serije:</string>
+    <string name="ImeVjezbe">Ime vježbe:</string>
 
 
 </resources>

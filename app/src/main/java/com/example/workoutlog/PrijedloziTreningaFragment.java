@@ -34,6 +34,7 @@ public class PrijedloziTreningaFragment extends Fragment {
             public void onClick(View v) {
                 Intent intentNewTemplateMain = new Intent(getActivity(), NewTemplateMain.class);
                 startActivity(intentNewTemplateMain);
+
             }
         });
         return view;

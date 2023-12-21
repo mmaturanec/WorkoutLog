@@ -50,6 +50,8 @@ public class RegistracijaActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intentPrijava = new Intent(RegistracijaActivity.this, MainActivity.class);
                 startActivity(intentPrijava);
+                overridePendingTransition(0, 0);
+
             }
         });
 
@@ -110,6 +112,8 @@ public class RegistracijaActivity extends AppCompatActivity {
         if(user != null){
             Intent MainMenu = new Intent(RegistracijaActivity.this, MainMenuActivity.class);
             startActivity(MainMenu);
+            overridePendingTransition(0, 0);
+
         }
     }
     public boolean isValidEmail(CharSequence target) {
@@ -123,6 +127,8 @@ public class RegistracijaActivity extends AppCompatActivity {
         if(currentUser != null){
             Intent MainMenu = new Intent(RegistracijaActivity.this, MainMenuActivity.class);
             startActivity(MainMenu);
+            overridePendingTransition(0, 0);
+
         }
     }
 }

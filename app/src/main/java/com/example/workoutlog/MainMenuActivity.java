@@ -60,6 +60,8 @@ public class MainMenuActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent SettingsIntent = new Intent(MainMenuActivity.this, SettingsActivity.class);
                 startActivity(SettingsIntent);
+                overridePendingTransition(0, 0);
+
             }
         });
 

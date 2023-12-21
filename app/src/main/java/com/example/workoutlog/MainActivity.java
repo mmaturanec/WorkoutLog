@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intentRegistracija = new Intent(MainActivity.this, RegistracijaActivity.class);
                 startActivity(intentRegistracija);
+                overridePendingTransition(0, 0);
+
             }
         });
         btnPrijava.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
         if(user != null){
             Intent MainMenu = new Intent(MainActivity.this, MainMenuActivity.class);
             startActivity(MainMenu);
+            overridePendingTransition(0, 0);
+
         }
     }
     @Override
@@ -90,6 +94,8 @@ public class MainActivity extends AppCompatActivity {
         if(currentUser != null){
             Intent MainMenu = new Intent(MainActivity.this, MainMenuActivity.class);
             startActivity(MainMenu);
+            overridePendingTransition(0, 0);
+
         }
     }
 }

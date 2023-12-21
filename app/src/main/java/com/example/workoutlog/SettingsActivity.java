@@ -26,6 +26,8 @@ public class SettingsActivity extends AppCompatActivity {
                 mAuth.signOut();
                 Intent intentPrijava = new Intent(SettingsActivity.this, MainActivity.class);
                 startActivity(intentPrijava);
+                overridePendingTransition(0, 0);
+
             }
         });
     }

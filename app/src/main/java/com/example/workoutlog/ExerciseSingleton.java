@@ -22,4 +22,14 @@ public class ExerciseSingleton {
     {
         lexercise.add(student);
     }
+    public void removeAtPosition(int position) {
+        if (position >= 0 && position < lexercise.size()) {
+            lexercise.remove(position);
+        }
+    }
+    public void addAtPosition(Exercise exercise, int position) {
+        if (position >= 0 && position <= lexercise.size()) {
+            lexercise.add(position, exercise);
+        }
+    }
 }

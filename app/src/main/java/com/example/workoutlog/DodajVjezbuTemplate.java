@@ -6,19 +6,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DodajVjezbuTemplate extends AppCompatActivity {
     private Button btnDodajVjezbu;
     private Button btnDodajSeriju;
     private EditText etImeVjezbeTemplate;
     private TextView tvBrojSerija;
+    private int position;
     private ArrayList<ExerciseSet> lexercise = new ArrayList<>();
     private ArrayList<ExerciseSet> exerciseSets = new ArrayList<>();
     @Override
@@ -30,7 +34,22 @@ public class DodajVjezbuTemplate extends AppCompatActivity {
         btnDodajSeriju = findViewById(R.id.btnDodajSeriju);
         tvBrojSerija = findViewById(R.id.tvUkupanBrojSerija);
         RecyclerView recyclerView = findViewById(R.id.rvDodajVjezbu);
-        lexercise.add(new ExerciseSet("", ""));
+
+        final Bundle bundle = getIntent().getExtras();
+
+        if(bundle != null)
+        {
+            etImeVjezbeTemplate.setText(bundle.getString("imeVjezbe"));
+            lexercise = bundle.getParcelableArrayList("setoviVjezbe");
+
+            position = bundle.getInt("position");
+
+        }
+        else{
+            lexercise.add(new ExerciseSet("", ""));
+          }
+
+
         DodajVjezbuTemplateAdapter adapterRV = new DodajVjezbuTemplateAdapter(this, lexercise);
         recyclerView.setAdapter(adapterRV);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -104,21 +123,47 @@ public class DodajVjezbuTemplate extends AppCompatActivity {
 
                 // Update the adapter with the collected values and refresh RecyclerView
                 adapterRV.updateExerciseSetValues(updatedReps, updatedWeights);
-                Log.d("listasetova", "Lista:");
-                Log.d("listasetova", "velicina: "+exerciseSets.size());
-                for (ExerciseSet set : exerciseSets) {
-                    Log.d("listasetova", "Reps: " + set.reps + ", Weight: " + set.weight);
-                }
-                }
+
                 String nazivVjezbe = etImeVjezbeTemplate.getText().toString();
+                if(TextUtils.isEmpty(nazivVjezbe))
+                {
+                    Toast.makeText(DodajVjezbuTemplate.this, getResources().getString(R.string.UnesiImeVjezbe), Toast.LENGTH_SHORT).show();
 
-            //TODO: Dodaj validaciju na unose i onda promjeni onaj row (dodaj mu neki prikaz liste vjv recycler viewer jos jedan to ti je najlakse prema instanci) i implementiraj nakraju prosirenje instance
-               // Intent intNewTemp = new Intent(DodajVjezbuTemplate.this, NewTemplateMain.class);
-                //ExerciseSingleton.getInstance().addExercise(new Exercise(etImeVjezbeTemplate.getText().toString()));
-                //startActivity(intNewTemp);
+                }
+                else if(checkForEmptySet(exerciseSets))
+                {
+                    Toast.makeText(DodajVjezbuTemplate.this, getResources().getString(R.string.UnesiteVrijednostiZaSvakuSeriju), Toast.LENGTH_SHORT).show();
 
-        });
+                }
+                else{
 
+                        Intent intNewTemp = new Intent(DodajVjezbuTemplate.this, NewTemplateMain.class);
+                    if(bundle != null)
+                    {
+                        ExerciseSingleton.getInstance().removeAtPosition(position);
+                        ExerciseSingleton.getInstance().addAtPosition(new Exercise(nazivVjezbe, exerciseSets), position);
+                    }
+                    else{
+                        ExerciseSingleton.getInstance().addExercise(new Exercise(nazivVjezbe, exerciseSets));
+                    }
+                        startActivity(intNewTemp);
+                        overridePendingTransition(0, 0);
+                    }
+
+
+                }
+
+
+
+
+                });//zavrsetakOnClick
+        }
+    private static boolean checkForEmptySet(List<ExerciseSet> exerciseSets) {
+        for (ExerciseSet exerciseSet : exerciseSets) {
+            if (exerciseSet.getReps().isEmpty() || exerciseSet.getWeight().isEmpty()) {
+                return true;
+            }
+        }
+        return false;
     }
-
 }
