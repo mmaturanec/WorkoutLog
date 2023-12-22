@@ -101,4 +101,15 @@
         android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/tvZaBrojSerija"
         app:layout_constraintTop_toBottomOf="@+id/tiUnesiImeVjezbe" />
+
+    <ImageView
+        android:id="@+id/ivOdustaniDVT"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/baseline_dangerous_24"
+        app:tint="@color/red" />
 </androidx.constraintlayout.widget.ConstraintLayout>

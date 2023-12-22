@@ -21,26 +21,78 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvNewTemplateMain"
-        android:layout_width="388dp"
-        android:layout_height="615dp"
+        android:layout_width="387dp"
+        android:layout_height="532dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="80dp"
         android:layout_marginEnd="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivInfoButtonTemplate" />
+        app:layout_constraintTop_toBottomOf="@+id/btnDodajVjezbu" />
 
     <Button
         android:id="@+id/btnDodajVjezbu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
+        android:layout_width="134dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="4dp"
         android:backgroundTint="@color/gold"
         android:text="@string/DodajVjezbu"
         android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnSpremiTrening"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/gold"
+        android:text="@string/SpremiTemplate"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rvNewTemplateMain" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        app:counterTextColor="@color/white"
+        app:helperTextTextColor="@color/white"
+        app:hintTextColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/rvNewTemplateMain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:placeholderTextColor="@color/white"
+        app:prefixTextColor="@color/white"
+        app:suffixTextColor="@color/white">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiTemplateName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/ImePredlozka"
+            android:textColor="@color/white"
+            android:textColorHighlight="@color/gold"
+            android:textColorHint="@color/white"
+            android:textColorLink="@color/gold" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/ivOdbaciTemplate"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnSpremiTrening"
+        app:srcCompat="@drawable/baseline_dangerous_24"
+        app:tint="@color/red" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

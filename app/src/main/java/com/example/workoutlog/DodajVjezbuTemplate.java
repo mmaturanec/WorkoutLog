@@ -5,12 +5,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +25,7 @@ public class DodajVjezbuTemplate extends AppCompatActivity {
     private EditText etImeVjezbeTemplate;
     private TextView tvBrojSerija;
     private int position;
+    private ImageView ivOdustaniDVT;
     private ArrayList<ExerciseSet> lexercise = new ArrayList<>();
     private ArrayList<ExerciseSet> exerciseSets = new ArrayList<>();
     @Override
@@ -34,6 +37,7 @@ public class DodajVjezbuTemplate extends AppCompatActivity {
         btnDodajSeriju = findViewById(R.id.btnDodajSeriju);
         tvBrojSerija = findViewById(R.id.tvUkupanBrojSerija);
         RecyclerView recyclerView = findViewById(R.id.rvDodajVjezbu);
+        ivOdustaniDVT = findViewById(R.id.ivOdustaniDVT);
 
         final Bundle bundle = getIntent().getExtras();
 
@@ -157,6 +161,12 @@ public class DodajVjezbuTemplate extends AppCompatActivity {
 
 
                 });//zavrsetakOnClick
+        ivOdustaniDVT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         }
     private static boolean checkForEmptySet(List<ExerciseSet> exerciseSets) {
         for (ExerciseSet exerciseSet : exerciseSets) {

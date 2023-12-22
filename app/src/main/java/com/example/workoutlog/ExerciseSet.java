@@ -6,6 +6,9 @@ public class ExerciseSet implements Parcelable {
     private String reps;
     private String weight;
 
+    public ExerciseSet(){
+
+    }
     public ExerciseSet(String reps, String weight) {
         this.reps = reps;
         this.weight = weight;

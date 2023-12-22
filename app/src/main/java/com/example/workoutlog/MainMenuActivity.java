@@ -6,6 +6,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -30,6 +31,14 @@ public class MainMenuActivity extends AppCompatActivity {
         myViewPagerAdapter = new MyViewPagerAdapter(this);
         viewPager2.setAdapter(myViewPagerAdapter);
         ivSettings = findViewById(R.id.ivSettings);
+        int initialFragmentPosition = getIntent().getIntExtra("INITIAL_FRAGMENT", 0);
+
+        Log.d("fragment", "onCreate: "+initialFragmentPosition);
+        if( initialFragmentPosition != 0)
+        {
+            viewPager2.post(() -> viewPager2.setCurrentItem(initialFragmentPosition, false));
+
+        }
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {

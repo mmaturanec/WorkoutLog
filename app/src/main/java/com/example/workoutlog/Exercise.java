@@ -7,10 +7,16 @@ public class Exercise {
     private String exerciseName;
     private ArrayList<ExerciseSet> exerciseSets;
 
+    public Exercise()
+    {
+
+    }
+
 
     public Exercise(String exerciseName, ArrayList<ExerciseSet> exerciseSets) {
         this.exerciseName = exerciseName;
         this.exerciseSets = exerciseSets;
+
     }
 
     public String getExerciseName() {
@@ -20,4 +26,6 @@ public class Exercise {
     public ArrayList<ExerciseSet> getExerciseSets() {
         return exerciseSets;
     }
+
+
 }

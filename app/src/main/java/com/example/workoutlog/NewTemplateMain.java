@@ -1,23 +1,42 @@
 package com.example.workoutlog;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-public class NewTemplateMain extends AppCompatActivity implements NewTemplateMainAdapterInterface, PotvrdiBrisanjeVjezbeDialog.DialogClickListener  {
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
+public class NewTemplateMain extends AppCompatActivity implements NewTemplateMainAdapterInterface, PotvrdiBrisanjeVjezbeDialog.DialogClickListener, PotvrdiBrisanjeTemplateDialog.DialogClickListener {
     private ArrayList<Exercise> lexercise;
     private Button btnDodajVjezbu;
+    private Button btnSpremiTrening;
     private NewTemplateMainAdapter adapterRV;
     private ImageView ivInfoButtonTemplate;
+    private EditText tiTemplateName;
+    private ImageView ivOdbaciTemplate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,12 +45,22 @@ public class NewTemplateMain extends AppCompatActivity implements NewTemplateMai
         btnDodajVjezbu = findViewById(R.id.btnDodajVjezbu);
         RecyclerView recyclerView = findViewById(R.id.rvNewTemplateMain);
         ivInfoButtonTemplate = findViewById(R.id.ivInfoButtonTemplate);
-
+        btnSpremiTrening = findViewById(R.id.btnSpremiTrening);
+        tiTemplateName = findViewById(R.id.tiTemplateName);
+        tiTemplateName.setText(ExerciseSingleton.getInstance().getSetImeTemplate());
         adapterRV = new NewTemplateMainAdapter(this, lexercise, this);
+        ivOdbaciTemplate = findViewById(R.id.ivOdbaciTemplate);
         recyclerView.setAdapter(adapterRV);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
+
+        ivOdbaciTemplate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDeleteTemplateDialog();
+            }
+        });
         ivInfoButtonTemplate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,6 +72,7 @@ public class NewTemplateMain extends AppCompatActivity implements NewTemplateMai
         btnDodajVjezbu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ExerciseSingleton.getInstance().setSetImeTemplate(tiTemplateName.getText().toString());
                 Intent intDodajVjezbu = new Intent(NewTemplateMain.this, DodajVjezbuTemplate.class);
                 startActivity(intDodajVjezbu);
                 overridePendingTransition(0, 0);
@@ -50,8 +80,116 @@ public class NewTemplateMain extends AppCompatActivity implements NewTemplateMai
             }
         });
 
-    }
 
+
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        btnSpremiTrening.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String imeTemplate = tiTemplateName.getText().toString();
+
+                if(TextUtils.isEmpty(imeTemplate))
+                {
+                    Toast.makeText(NewTemplateMain.this, getString(R.string.UnesiTemplateIme), Toast.LENGTH_SHORT).show();
+
+                }
+                else if(lexercise.isEmpty())
+                {
+                    Toast.makeText(NewTemplateMain.this, getString(R.string.DodajBaremJednuVjezbu), Toast.LENGTH_SHORT).show();
+
+                }
+                else{
+                    if (currentUser != null) {
+                        String userUid = currentUser.getUid();
+                        String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+
+                        DatabaseReference userExerciseTemplateRef = FirebaseDatabase.getInstance().getReference()
+                                .child("user_exercise_templates")
+                                .child(userUid);
+
+                        userExerciseTemplateRef.orderByChild("templateName").equalTo(imeTemplate).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+                                    Toast.makeText(NewTemplateMain.this, getString(R.string.ImePredloskaVecPostojI), Toast.LENGTH_SHORT).show();
+
+                                } else {
+                                    ExerciseTemplate exerciseTemplate = new ExerciseTemplate(imeTemplate,lexercise, currentDate);
+
+                                    String templateKey = userExerciseTemplateRef.push().getKey();
+                                    if (templateKey != null) {
+                                        userExerciseTemplateRef.child(templateKey).setValue(exerciseTemplate)
+                                                .addOnSuccessListener(aVoid -> {
+                                                    ExerciseSingleton.destroyInstance();
+                                                    Toast.makeText(NewTemplateMain.this, getString(R.string.uspjesnoSpremljenPredlozak), Toast.LENGTH_SHORT).show();
+                                                    Intent intentMainmenu = new Intent(NewTemplateMain.this, MainMenuActivity.class);
+                                                    intentMainmenu.putExtra("INITIAL_FRAGMENT", 1);
+                                                    startActivity(intentMainmenu);
+                                                    overridePendingTransition(0, 0);
+
+                                                })
+                                                .addOnFailureListener(e -> {
+                                                    Toast.makeText(NewTemplateMain.this, getString(R.string.neuspjesnoSpremljenPredlozak), Toast.LENGTH_SHORT).show();
+
+                                                });
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                // Handle potential database error
+                            }
+                        });
+                    } else {
+                        // User is not authenticated
+                        // Handle this case as needed
+                    }
+                }
+
+
+
+                /*
+                if (currentUser != null) {
+                    String userUid = currentUser.getUid();
+                    String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                    String imeTemplate = tiTemplateName.getText().toString();
+
+
+
+                    DatabaseReference userExerciseTemplateRef = FirebaseDatabase.getInstance().getReference()
+                            .child("user_exercise_templates")
+                            .child(userUid);
+
+                    ExerciseTemplate exerciseTemplate = new ExerciseTemplate(imeTemplate,lexercise, currentDate);
+
+                    String templateKey = userExerciseTemplateRef.push().getKey();
+                    if (templateKey != null) {
+                        userExerciseTemplateRef.child(templateKey).setValue(exerciseTemplate)
+                                .addOnSuccessListener(aVoid -> {
+                                    Toast.makeText(NewTemplateMain.this, getString(R.string.uspjesnoSpremljenPredlozak), Toast.LENGTH_SHORT).show();
+                                })
+                                .addOnFailureListener(e -> {
+                                    Toast.makeText(NewTemplateMain.this, getString(R.string.neuspjesnoSpremljenPredlozak), Toast.LENGTH_SHORT).show();
+
+                                });
+                    }
+                } else {
+                    Toast.makeText(NewTemplateMain.this, getString(R.string.neuspjesnoSpremljenPredlozak), Toast.LENGTH_SHORT).show();
+
+                }
+
+
+                 */
+            }
+        });
+    }
+    @Override
+    public void onBackPressed() {
+    }
     @Override
     public void onItemClick(int position) {
         Intent intent = new Intent(NewTemplateMain.this, DodajVjezbuTemplate.class);
@@ -81,5 +219,13 @@ public class NewTemplateMain extends AppCompatActivity implements NewTemplateMai
     public void onNegativeButtonClick() {
         PotvrdiBrisanjeVjezbeDialog.dismissDeleteExerciseDialog();
 
+    }
+    private void showDeleteTemplateDialog() {
+        PotvrdiBrisanjeTemplateDialog.showDialog(NewTemplateMain.this, new PotvrdiBrisanjeTemplateDialog.DialogClickListener() {
+            @Override
+            public void onNegativeButtonClick() {
+                // Handle negative button click (if needed)
+            }
+        });
     }
 }
