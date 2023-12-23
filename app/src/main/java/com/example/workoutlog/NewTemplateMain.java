@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -37,21 +39,42 @@ public class NewTemplateMain extends AppCompatActivity implements NewTemplateMai
     private ImageView ivInfoButtonTemplate;
     private EditText tiTemplateName;
     private ImageView ivOdbaciTemplate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_template_main);
         lexercise = (ArrayList<Exercise>) ExerciseSingleton.getInstance().getExercises();
+
         btnDodajVjezbu = findViewById(R.id.btnDodajVjezbu);
         RecyclerView recyclerView = findViewById(R.id.rvNewTemplateMain);
         ivInfoButtonTemplate = findViewById(R.id.ivInfoButtonTemplate);
         btnSpremiTrening = findViewById(R.id.btnSpremiTrening);
         tiTemplateName = findViewById(R.id.tiTemplateName);
+
+
+
+        final Bundle bundle = getIntent().getExtras();
+
+        if(bundle != null)
+        {
+
+            ExerciseSingleton.getInstance().setSetImeTemplate(bundle.getString("templateName"));
+
+            lexercise = bundle.getParcelableArrayList("exerciseList");
+            ExerciseSingleton.getInstance().setNodeId(bundle.getString("nodeId"));
+            ExerciseSingleton.getInstance().setLexercise(lexercise);
+            ExerciseSingleton.getInstance().setEditingTemplate(true);
+
+        }
         tiTemplateName.setText(ExerciseSingleton.getInstance().getSetImeTemplate());
+
+
         adapterRV = new NewTemplateMainAdapter(this, lexercise, this);
         ivOdbaciTemplate = findViewById(R.id.ivOdbaciTemplate);
         recyclerView.setAdapter(adapterRV);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
 
 
 
@@ -90,6 +113,7 @@ public class NewTemplateMain extends AppCompatActivity implements NewTemplateMai
             @Override
             public void onClick(View v) {
                 String imeTemplate = tiTemplateName.getText().toString();
+                String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
 
                 if(TextUtils.isEmpty(imeTemplate))
                 {
@@ -101,89 +125,70 @@ public class NewTemplateMain extends AppCompatActivity implements NewTemplateMai
                     Toast.makeText(NewTemplateMain.this, getString(R.string.DodajBaremJednuVjezbu), Toast.LENGTH_SHORT).show();
 
                 }
-                else{
-                    if (currentUser != null) {
-                        String userUid = currentUser.getUid();
-                        String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                else if(ExerciseSingleton.getInstance().getEditingTemplate() == true)
+                {
+                    ExerciseTemplate exerciseTemplate = new ExerciseTemplate(imeTemplate,lexercise, currentDate);
+                    String nodeId = ExerciseSingleton.getInstance().getNodeId();
+                    updateExerciseTemplatesInDatabase(exerciseTemplate, nodeId);
+                    ExerciseSingleton.destroyInstance();
+                    Toast.makeText(NewTemplateMain.this, getString(R.string.uspjesnoAzuriranPredlozak), Toast.LENGTH_SHORT).show();
 
-                        DatabaseReference userExerciseTemplateRef = FirebaseDatabase.getInstance().getReference()
-                                .child("user_exercise_templates")
-                                .child(userUid);
+                    Intent intentMainmenu = new Intent(NewTemplateMain.this, MainMenuActivity.class);
+                    intentMainmenu.putExtra("INITIAL_FRAGMENT", 1);
+                    startActivity(intentMainmenu);
+                    overridePendingTransition(0, 0);
+                }
+                    else{
+                        if (currentUser != null) {
+                            String userUid = currentUser.getUid();
 
-                        userExerciseTemplateRef.orderByChild("templateName").equalTo(imeTemplate).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                if (dataSnapshot.exists()) {
-                                    Toast.makeText(NewTemplateMain.this, getString(R.string.ImePredloskaVecPostojI), Toast.LENGTH_SHORT).show();
+                            DatabaseReference userExerciseTemplateRef = FirebaseDatabase.getInstance().getReference()
+                                    .child("user_exercise_templates")
+                                    .child(userUid);
 
-                                } else {
-                                    ExerciseTemplate exerciseTemplate = new ExerciseTemplate(imeTemplate,lexercise, currentDate);
+                            userExerciseTemplateRef.orderByChild("templateName").equalTo(imeTemplate).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    if (dataSnapshot.exists()) {
+                                        Toast.makeText(NewTemplateMain.this, getString(R.string.ImePredloskaVecPostojI), Toast.LENGTH_SHORT).show();
 
-                                    String templateKey = userExerciseTemplateRef.push().getKey();
-                                    if (templateKey != null) {
-                                        userExerciseTemplateRef.child(templateKey).setValue(exerciseTemplate)
-                                                .addOnSuccessListener(aVoid -> {
-                                                    ExerciseSingleton.destroyInstance();
-                                                    Toast.makeText(NewTemplateMain.this, getString(R.string.uspjesnoSpremljenPredlozak), Toast.LENGTH_SHORT).show();
-                                                    Intent intentMainmenu = new Intent(NewTemplateMain.this, MainMenuActivity.class);
-                                                    intentMainmenu.putExtra("INITIAL_FRAGMENT", 1);
-                                                    startActivity(intentMainmenu);
-                                                    overridePendingTransition(0, 0);
+                                    } else {
+                                        ExerciseTemplate exerciseTemplate = new ExerciseTemplate(imeTemplate,lexercise, currentDate);
 
-                                                })
-                                                .addOnFailureListener(e -> {
-                                                    Toast.makeText(NewTemplateMain.this, getString(R.string.neuspjesnoSpremljenPredlozak), Toast.LENGTH_SHORT).show();
+                                        String templateKey = userExerciseTemplateRef.push().getKey();
+                                        if (templateKey != null) {
+                                            userExerciseTemplateRef.child(templateKey).setValue(exerciseTemplate)
+                                                    .addOnSuccessListener(aVoid -> {
+                                                        ExerciseSingleton.destroyInstance();
+                                                        Toast.makeText(NewTemplateMain.this, getString(R.string.uspjesnoSpremljenPredlozak), Toast.LENGTH_SHORT).show();
+                                                        Intent intentMainmenu = new Intent(NewTemplateMain.this, MainMenuActivity.class);
+                                                        intentMainmenu.putExtra("INITIAL_FRAGMENT", 1);
+                                                        startActivity(intentMainmenu);
+                                                        overridePendingTransition(0, 0);
 
-                                                });
+                                                    })
+                                                    .addOnFailureListener(e -> {
+                                                        Toast.makeText(NewTemplateMain.this, getString(R.string.neuspjesnoSpremljenPredlozak), Toast.LENGTH_SHORT).show();
+
+                                                    });
+                                        }
                                     }
                                 }
-                            }
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-                                // Handle potential database error
-                            }
-                        });
-                    } else {
-                        // User is not authenticated
-                        // Handle this case as needed
-                    }
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    // Handle potential database error
+                                }
+                            });
+                        } else {
+                            // User is not authenticated
+                            // Handle this case as needed
+                        }
                 }
 
 
 
-                /*
-                if (currentUser != null) {
-                    String userUid = currentUser.getUid();
-                    String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-                    String imeTemplate = tiTemplateName.getText().toString();
 
-
-
-                    DatabaseReference userExerciseTemplateRef = FirebaseDatabase.getInstance().getReference()
-                            .child("user_exercise_templates")
-                            .child(userUid);
-
-                    ExerciseTemplate exerciseTemplate = new ExerciseTemplate(imeTemplate,lexercise, currentDate);
-
-                    String templateKey = userExerciseTemplateRef.push().getKey();
-                    if (templateKey != null) {
-                        userExerciseTemplateRef.child(templateKey).setValue(exerciseTemplate)
-                                .addOnSuccessListener(aVoid -> {
-                                    Toast.makeText(NewTemplateMain.this, getString(R.string.uspjesnoSpremljenPredlozak), Toast.LENGTH_SHORT).show();
-                                })
-                                .addOnFailureListener(e -> {
-                                    Toast.makeText(NewTemplateMain.this, getString(R.string.neuspjesnoSpremljenPredlozak), Toast.LENGTH_SHORT).show();
-
-                                });
-                    }
-                } else {
-                    Toast.makeText(NewTemplateMain.this, getString(R.string.neuspjesnoSpremljenPredlozak), Toast.LENGTH_SHORT).show();
-
-                }
-
-
-                 */
             }
         });
     }
@@ -228,4 +233,29 @@ public class NewTemplateMain extends AppCompatActivity implements NewTemplateMai
             }
         });
     }
+    private void updateExerciseTemplatesInDatabase(ExerciseTemplate exerciseTemplate, String nodeId) {
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        DatabaseReference exerciseTemplateRef = FirebaseDatabase.getInstance().getReference()
+                .child("user_exercise_templates")
+                .child(currentUser.getUid()) // Replace currentUser with your user reference
+                .child(nodeId); // Provide the specific node ID to update
+
+        exerciseTemplateRef.setValue(exerciseTemplate)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        // The node has been updated successfully
+                        // Handle success as needed
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Handle any errors that occurred while updating
+                    }
+                });
+    }
+
 }

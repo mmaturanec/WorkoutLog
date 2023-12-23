@@ -8,6 +8,17 @@
     android:backgroundTint="@color/black"
     tools:context=".MainMenuActivity">
 
+    <ImageView
+        android:id="@+id/infoButtonMainMenu"
+        android:layout_width="42dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/baseline_info_24"
+        app:tint="@color/gold"
+        tools:srcCompat="@drawable/baseline_info_24" />
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="409dp"

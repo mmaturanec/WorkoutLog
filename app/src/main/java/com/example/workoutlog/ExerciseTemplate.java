@@ -1,5 +1,8 @@
 package com.example.workoutlog;
 
+import com.google.firebase.database.Exclude;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 public class ExerciseTemplate {
@@ -7,6 +10,7 @@ public class ExerciseTemplate {
     private String TemplateName;
     private ArrayList<Exercise> lexercise;
     private String Date;
+    private String nodeId;
     public ExerciseTemplate() {
 
     }
@@ -43,4 +47,14 @@ public class ExerciseTemplate {
     public void setTemplateName(String templateName) {
         TemplateName = templateName;
     }
+    @Exclude // Exclude this field from being saved in Firebase
+    public String getNodeId() {
+        return nodeId;
+    }
+
+    public void setNodeId(String nodeId) {
+        this.nodeId = nodeId;
+    }
+
+
 }

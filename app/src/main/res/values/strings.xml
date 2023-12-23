@@ -27,6 +27,7 @@
     <string name="UnesiTemplateIme">Unesite ime predloška</string>
     <string name="DodajBaremJednuVjezbu">Dodajte barem jednu vježbu!</string>
     <string name="uspjesnoSpremljenPredlozak">Uspješno spremljen predložak!</string>
+    <string name="uspjesnoAzuriranPredlozak">Uspješno ažuriran predložak!</string>
     <string name="neuspjesnoSpremljenPredlozak">Pogreška prilikom spremanja predloška!</string>
     <string name="ImePredloskaVecPostojI">Ime predloška se već koristi!</string>
     <string name="RadnaKilaza">Radna kilaža</string>
@@ -40,12 +41,17 @@
     <string name="SpremiTemplate">Spremi predložak</string>
     <string name="ImeVjezbe">Ime vježbe:</string>
     <string name="Obrisi">Obriši</string>
+    <string name="Odbaci">Odbaci</string>
     <string name="Odustani">Odustani</string>
-    <string name="JesteLiSigurniDaZeliteObrisatiVjezbu">Jeste li sigurni da želite obrisati vježbu?</string>
-    <string name="JesteLiSigurniDaZeliteObrisatiTemplate">Jeste li sigurni da želite obrisati predložak?</string>
+    <string name="JesteLiSigurniDaZeliteObrisatiVjezbu">Jeste li sigurni da želite obrisati?</string>
+    <string name="JesteLiSigurniDaZeliteObrisatiTemplate">Jeste li sigurni da želite odbaciti predložak?</string>
     <string name="infoovjezbidialog1">Pritisnite na ikonu: </string>
-    <string name="infoovjezbidialog2">kako bi ste uredili unesenu vježbu. </string>
-    <string name="infoovjezbidialog3">Držite dodir na imenu vježbe kako bi ste ju obrisali.</string>
+    <string name="infoovjezbidialog2">kako bi ste uredili zapis. </string>
+    <string name="infoovjezbidialog3">Držite dodir na imenu kako bi ste obrisali zapis.</string>
+    <string name="uspjesnaAktualizacijaBaze">Predložak je uspješno ažuriran!</string>
+    <string name="neuspjesnaAktualizacijaBaze">Greška prilikom ažuriranja predloška!</string>
+    <string name="uspjesnoBrisanjeTemplate">Uspješno ste obrisali predložak!</string>
+    <string name="neuspjesnoBrisanjeTemplate">Neuspješno ste obrisali predložak!</string>
 
 
 

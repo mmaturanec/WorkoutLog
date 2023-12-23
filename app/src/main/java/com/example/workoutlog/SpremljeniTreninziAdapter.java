@@ -16,10 +16,12 @@ import java.util.ArrayList;
 public class SpremljeniTreninziAdapter extends RecyclerView.Adapter<SpremljeniTreninziAdapter.MyViewHolder>{
     Context context;
     ArrayList<ExerciseTemplate> lexercise;
+    private final SpremljeniTreninziAdapterInterface recyclerViewInterface;
 
-    public SpremljeniTreninziAdapter(Context context, ArrayList<ExerciseTemplate> lexercise) {
+    public SpremljeniTreninziAdapter(Context context, ArrayList<ExerciseTemplate> lexercise, SpremljeniTreninziAdapterInterface recyclerViewInterface ) {
         this.context = context;
         this.lexercise = lexercise;
+        this.recyclerViewInterface = recyclerViewInterface;
     }
 
     @NonNull
@@ -27,7 +29,7 @@ public class SpremljeniTreninziAdapter extends RecyclerView.Adapter<SpremljeniTr
     public SpremljeniTreninziAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.fragment_rvspremljeni_treninzi_row, parent, false);
-        return new SpremljeniTreninziAdapter.MyViewHolder(view);
+        return new SpremljeniTreninziAdapter.MyViewHolder(view, recyclerViewInterface);
     }
 
     @Override
@@ -40,13 +42,44 @@ public class SpremljeniTreninziAdapter extends RecyclerView.Adapter<SpremljeniTr
     public int getItemCount() {
         return lexercise.size();
     }
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder {
 
+        ImageView ivEditTemplateST;
         TextView tvImeTemplate;
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView, SpremljeniTreninziAdapterInterface recyclerViewInterface) {
             super(itemView);
 
             tvImeTemplate = itemView.findViewById(R.id.tvImeTemplate);
+            ivEditTemplateST = itemView.findViewById(R.id.ivEditTemplateST);
+
+            ivEditTemplateST.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (recyclerViewInterface != null) {
+                        int pos = getAdapterPosition();
+
+                        if (pos != RecyclerView.NO_POSITION) {
+                            recyclerViewInterface.onItemClick(pos); // Assuming you have a method for edit click in the interface
+                        }
+                    }
+                }
+            });
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    if (recyclerViewInterface != null) {
+                        int pos = getAdapterPosition();
+
+                        if (pos != RecyclerView.NO_POSITION) {
+                            recyclerViewInterface.onItemLongclick(pos); // Assuming you have a method for long click deletion in the interface
+                            notifyItemRemoved(pos);
+                            notifyItemRangeChanged(pos, getItemCount()); // Notify adapter of data change
+                            return true; // Return true to indicate the long click has been consumed
+                        }
+                    }
+                    return false; // Return false if the long click action was not handled
+                }
+            });
         }
     }
 }

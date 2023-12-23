@@ -11,7 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,12 +27,14 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 
-public class PrijedloziTreningaFragment extends Fragment {
+public class PrijedloziTreningaFragment extends Fragment implements SpremljeniTreninziAdapterInterface, PotvrdiBrisanjeVjezbeDialog.DialogClickListener{
 
     FloatingActionButton btnAddTemplate;
     RecyclerView recyclerView;
     SpremljeniTreninziAdapter adapter;
     ArrayList<ExerciseTemplate> exerciseTemplates = new ArrayList<>();
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,11 +51,13 @@ public class PrijedloziTreningaFragment extends Fragment {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new SpremljeniTreninziAdapter(getActivity(), exerciseTemplates);
+        adapter = new SpremljeniTreninziAdapter(getActivity(), exerciseTemplates, this);
         recyclerView.setAdapter(adapter);
 
 
         fetchExerciseTemplatesFromFirebase();
+
+
 
         btnAddTemplate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +84,7 @@ public class PrijedloziTreningaFragment extends Fragment {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     ExerciseTemplate exerciseTemplate = snapshot.getValue(ExerciseTemplate.class);
                     if (exerciseTemplate != null) {
+                        exerciseTemplate.setNodeId(snapshot.getKey());
                         exerciseTemplates.add(exerciseTemplate);
                     }
                 }
@@ -88,5 +96,64 @@ public class PrijedloziTreningaFragment extends Fragment {
                 // Handle error
             }
         });
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Intent intent = new Intent(getActivity(), NewTemplateMain.class);
+
+        intent.putExtra("templateName", exerciseTemplates.get(position).getTemplateName());
+        intent.putParcelableArrayListExtra("exerciseList", exerciseTemplates.get(position).getLexercise());
+        intent.putExtra("nodeId", exerciseTemplates.get(position).getNodeId());
+        startActivity(intent);
+        //overridePendingTransition(0, 0);
+    }
+
+    @Override
+    public void onItemLongclick(int position) {
+        PotvrdiBrisanjeVjezbeDialog.showDeleteExerciseDialog(getContext(), this, position);
+
+
+
+    }
+    private void deleteNodeFromDatabase(String nodeId) {
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if (currentUser != null) {
+            DatabaseReference nodeRef = FirebaseDatabase.getInstance().getReference()
+                    .child("user_exercise_templates")
+                    .child(currentUser.getUid()) // Replace currentUser with your user reference
+                    .child(nodeId); // Provide the specific node ID to delete
+
+            nodeRef.removeValue()
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(getActivity(), getResources().getString(R.string.uspjesnoBrisanjeTemplate), Toast.LENGTH_SHORT).show();
+
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getActivity(), getResources().getString(R.string.neuspjesnoBrisanjeTemplate), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        } else {
+        }
+    }
+
+    @Override
+    public void onPositiveButtonClick(int position) {
+        String nodeId = exerciseTemplates.get(position).getNodeId();
+        deleteNodeFromDatabase(nodeId);
+        fetchExerciseTemplatesFromFirebase();
+    }
+
+    @Override
+    public void onNegativeButtonClick() {
+        PotvrdiBrisanjeVjezbeDialog.dismissDeleteExerciseDialog();
+
     }
 }

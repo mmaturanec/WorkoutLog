@@ -105,7 +105,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:paddingStart="45dp"
+                    android:paddingStart="60dp"
                     android:text="@string/infoovjezbidialog3"
                     android:textColor="@color/white" />
 

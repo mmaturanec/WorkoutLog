@@ -14,12 +14,12 @@ import android.widget.ImageView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class MainMenuActivity extends AppCompatActivity {
+public class MainMenuActivity extends AppCompatActivity  {
 
     private TabLayout tabLayout;
     private ViewPager2 viewPager2;
     private MyViewPagerAdapter myViewPagerAdapter;
-    private ImageView ivSettings;
+    private ImageView ivSettings, infoButtonMainMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,14 +31,34 @@ public class MainMenuActivity extends AppCompatActivity {
         myViewPagerAdapter = new MyViewPagerAdapter(this);
         viewPager2.setAdapter(myViewPagerAdapter);
         ivSettings = findViewById(R.id.ivSettings);
+        infoButtonMainMenu = findViewById(R.id.infoButtonMainMenu);
         int initialFragmentPosition = getIntent().getIntExtra("INITIAL_FRAGMENT", 0);
 
-        Log.d("fragment", "onCreate: "+initialFragmentPosition);
         if( initialFragmentPosition != 0)
         {
             viewPager2.post(() -> viewPager2.setCurrentItem(initialFragmentPosition, false));
 
         }
+
+        infoButtonMainMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int currentTabPosition = tabLayout.getSelectedTabPosition();
+                if(currentTabPosition == 0)
+                {
+
+                }
+                if(currentTabPosition == 1)
+                {
+                    InfoODodavanjuVjezbiDialog.showInfoDialog(MainMenuActivity.this);
+
+                }
+                if(currentTabPosition == 2)
+                {
+
+                }
+            }
+        });
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {

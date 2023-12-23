@@ -7,6 +7,8 @@ public class ExerciseSingleton {
     private static ExerciseSingleton oInstance = null;
     private ArrayList<Exercise> lexercise = new ArrayList<>();
     private String SetImeTemplate = new String();
+    private Boolean editingTemplate = false;
+    private String nodeId = new String();
     protected ExerciseSingleton() {
     }
     public static ExerciseSingleton getInstance() {
@@ -43,5 +45,25 @@ public class ExerciseSingleton {
     }
     public static void destroyInstance() {
         oInstance = null;
+    }
+
+    public void setLexercise(ArrayList<Exercise> lexercise) {
+        this.lexercise = lexercise;
+    }
+
+    public Boolean getEditingTemplate() {
+        return editingTemplate;
+    }
+
+    public void setEditingTemplate(Boolean editingTemplate) {
+        this.editingTemplate = editingTemplate;
+    }
+
+    public String getNodeId() {
+        return nodeId;
+    }
+
+    public void setNodeId(String nodeId) {
+        this.nodeId = nodeId;
     }
 }
