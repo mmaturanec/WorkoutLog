@@ -24,30 +24,30 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <TextView
-                android:id="@+id/dialog_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingBottom="8dp"
-                android:text="@string/JesteLiSigurniDaZeliteObrisatiTemplate"
-                android:textColor="@color/gold"
-                android:textSize="18sp" />
-
             <Button
-                android:id="@+id/alertOdustaniTemplate"
-                android:layout_width="150dp"
+                android:id="@+id/btnOdaberiPredlozak"
+                android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/gold"
-                android:text="@string/Odustani"
+                android:text="@string/koristiPredlozak"
+                android:textColor="@color/black" />
+
+            <Button
+                android:id="@+id/btnOdaberiNoviTrening"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:backgroundTint="@color/gold"
+                android:text="@string/noviTrening"
                 android:textColor="@color/black" />
 
             <Button
                 android:id="@+id/btnOdustaniOdabir"
-                android:layout_width="150dp"
+                android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/red"
-                android:text="@string/Odbaci" />
+                android:text="@string/Odustani" />
 
 
         </LinearLayout>

@@ -8,7 +8,12 @@ public class ExerciseSingleton {
     private ArrayList<Exercise> lexercise = new ArrayList<>();
     private String SetImeTemplate = new String();
     private Boolean editingTemplate = false;
+    private Boolean noviTrening = false;
     private String nodeId = new String();
+
+
+
+    private String preuzetiDatum = new String();
     protected ExerciseSingleton() {
     }
     public static ExerciseSingleton getInstance() {
@@ -65,5 +70,20 @@ public class ExerciseSingleton {
 
     public void setNodeId(String nodeId) {
         this.nodeId = nodeId;
+    }
+
+    public void setNoviTrening(Boolean noviTrening) {
+        this.noviTrening = noviTrening;
+    }
+
+    public Boolean getNoviTrening() {
+        return noviTrening;
+    }
+    public String getPreuzetiDatum() {
+        return preuzetiDatum;
+    }
+
+    public void setPreuzetiDatum(String preuzetiDatum) {
+        this.preuzetiDatum = preuzetiDatum;
     }
 }

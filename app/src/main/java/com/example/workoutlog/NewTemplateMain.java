@@ -39,6 +39,7 @@ public class NewTemplateMain extends AppCompatActivity implements NewTemplateMai
     private ImageView ivInfoButtonTemplate;
     private EditText tiTemplateName;
     private ImageView ivOdbaciTemplate;
+    private String PreuzetiDatum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +52,7 @@ public class NewTemplateMain extends AppCompatActivity implements NewTemplateMai
         ivInfoButtonTemplate = findViewById(R.id.ivInfoButtonTemplate);
         btnSpremiTrening = findViewById(R.id.btnSpremiTrening);
         tiTemplateName = findViewById(R.id.tiTemplateName);
-
+        PreuzetiDatum = ExerciseSingleton.getInstance().getPreuzetiDatum();
 
 
         final Bundle bundle = getIntent().getExtras();
@@ -59,16 +60,47 @@ public class NewTemplateMain extends AppCompatActivity implements NewTemplateMai
         if(bundle != null)
         {
 
-            ExerciseSingleton.getInstance().setSetImeTemplate(bundle.getString("templateName"));
 
-            lexercise = bundle.getParcelableArrayList("exerciseList");
-            ExerciseSingleton.getInstance().setNodeId(bundle.getString("nodeId"));
-            ExerciseSingleton.getInstance().setLexercise(lexercise);
-            ExerciseSingleton.getInstance().setEditingTemplate(true);
+            String type = bundle.getString("type");
+
+            if(type.equals("editTemplate"))
+            {
+                ExerciseSingleton.getInstance().setSetImeTemplate(bundle.getString("templateName"));
+                lexercise = bundle.getParcelableArrayList("exerciseList");
+                ExerciseSingleton.getInstance().setNodeId(bundle.getString("nodeId"));
+                ExerciseSingleton.getInstance().setLexercise(lexercise);
+                ExerciseSingleton.getInstance().setEditingTemplate(true);
+
+            }
+            else if(type.equals("noviTrening")){
+                ExerciseSingleton.getInstance().setSetImeTemplate(bundle.getString("templateName"));
+                lexercise = bundle.getParcelableArrayList("exerciseList");
+                ExerciseSingleton.getInstance().setNodeId(bundle.getString("nodeId"));
+                ExerciseSingleton.getInstance().setLexercise(lexercise);
+                ExerciseSingleton.getInstance().setPreuzetiDatum(bundle.getString("datum"));
+                //PreuzetiDatum = bundle.getString("datum");
+
+
+                ExerciseSingleton.getInstance().setNoviTrening(true);
+            }
+            else if(type.equals("noviTreningClean"))
+            {
+                ExerciseSingleton.getInstance().setPreuzetiDatum(bundle.getString("datum"));
+                //PreuzetiDatum = bundle.getString("datum");
+
+
+                ExerciseSingleton.getInstance().setNoviTrening(true);
+
+            }
 
         }
         tiTemplateName.setText(ExerciseSingleton.getInstance().getSetImeTemplate());
+        if(ExerciseSingleton.getInstance().getNoviTrening() == true)
+        {
+            btnSpremiTrening.setText(R.string.ZavrsiTrening);
 
+        }
+        Log.d("getDatum", "preuzeti datum " + ExerciseSingleton.getInstance().getPreuzetiDatum());
 
         adapterRV = new NewTemplateMainAdapter(this, lexercise, this);
         ivOdbaciTemplate = findViewById(R.id.ivOdbaciTemplate);
@@ -124,6 +156,51 @@ public class NewTemplateMain extends AppCompatActivity implements NewTemplateMai
                 {
                     Toast.makeText(NewTemplateMain.this, getString(R.string.DodajBaremJednuVjezbu), Toast.LENGTH_SHORT).show();
 
+                }
+                else if(ExerciseSingleton.getInstance().getNoviTrening() == true)
+                {
+                    if (currentUser != null) {
+                        String userUid = currentUser.getUid();
+
+                        DatabaseReference userExerciseTemplateRef = FirebaseDatabase.getInstance().getReference()
+                                .child("user_exercise_history")
+                                .child(userUid);
+
+                        userExerciseTemplateRef.orderByChild("templateName").equalTo(imeTemplate).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                    ExerciseTemplate exerciseTemplate = new ExerciseTemplate(imeTemplate,lexercise, ExerciseSingleton.getInstance().getPreuzetiDatum());
+
+                                    String templateKey = userExerciseTemplateRef.push().getKey();
+                                    if (templateKey != null) {
+                                        userExerciseTemplateRef.child(templateKey).setValue(exerciseTemplate)
+                                                .addOnSuccessListener(aVoid -> {
+                                                    ExerciseSingleton.destroyInstance();
+                                                    Toast.makeText(NewTemplateMain.this, getString(R.string.uspjesnoSpremljenPredlozak), Toast.LENGTH_SHORT).show();
+                                                    Intent intentMainmenu = new Intent(NewTemplateMain.this, MainMenuActivity.class);
+                                                    intentMainmenu.putExtra("INITIAL_FRAGMENT", 0);
+                                                    startActivity(intentMainmenu);
+                                                    overridePendingTransition(0, 0);
+
+                                                })
+                                                .addOnFailureListener(e -> {
+                                                    Toast.makeText(NewTemplateMain.this, getString(R.string.neuspjesnoSpremljenPredlozak), Toast.LENGTH_SHORT).show();
+
+                                                });
+                                    }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                // Handle potential database error
+                            }
+                        });
+                    } else {
+                        // User is not authenticated
+                        // Handle this case as needed
+                    }
                 }
                 else if(ExerciseSingleton.getInstance().getEditingTemplate() == true)
                 {

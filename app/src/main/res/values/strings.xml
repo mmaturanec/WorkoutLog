@@ -23,13 +23,13 @@
     <string name="SpremiVjezbu">Spremi Vježbu</string>
     <string name="UnesiImeVjezbe">Unesite ime vježbe</string>
     <string name="BrojPonavljanja">Broj ponavljanja</string>
-    <string name="ImePredlozka">Ime predloška</string>
-    <string name="UnesiTemplateIme">Unesite ime predloška</string>
+    <string name="ImePredlozka">Naziv</string>
+    <string name="UnesiTemplateIme">Unesite naziv</string>
     <string name="DodajBaremJednuVjezbu">Dodajte barem jednu vježbu!</string>
-    <string name="uspjesnoSpremljenPredlozak">Uspješno spremljen predložak!</string>
-    <string name="uspjesnoAzuriranPredlozak">Uspješno ažuriran predložak!</string>
-    <string name="neuspjesnoSpremljenPredlozak">Pogreška prilikom spremanja predloška!</string>
-    <string name="ImePredloskaVecPostojI">Ime predloška se već koristi!</string>
+    <string name="uspjesnoSpremljenPredlozak">Uspješno spremljeno!</string>
+    <string name="uspjesnoAzuriranPredlozak">Uspješno ažurirano!</string>
+    <string name="neuspjesnoSpremljenPredlozak">Pogreška prilikom spremanja!</string>
+    <string name="ImePredloskaVecPostojI">Naziv se već koristi!</string>
     <string name="RadnaKilaza">Radna kilaža</string>
     <string name="DodajSeriju">Dodaj seriju</string>
     <string name="UkupanBrojSerija">Ukupan broj serija:</string>
@@ -44,7 +44,7 @@
     <string name="Odbaci">Odbaci</string>
     <string name="Odustani">Odustani</string>
     <string name="JesteLiSigurniDaZeliteObrisatiVjezbu">Jeste li sigurni da želite obrisati?</string>
-    <string name="JesteLiSigurniDaZeliteObrisatiTemplate">Jeste li sigurni da želite odbaciti predložak?</string>
+    <string name="JesteLiSigurniDaZeliteObrisatiTemplate">Jeste li sigurni da želite odbaciti promjene?</string>
     <string name="infoovjezbidialog1">Pritisnite na ikonu: </string>
     <string name="infoovjezbidialog2">kako bi ste uredili zapis. </string>
     <string name="infoovjezbidialog3">Držite dodir na imenu kako bi ste obrisali zapis.</string>
@@ -52,7 +52,10 @@
     <string name="neuspjesnaAktualizacijaBaze">Greška prilikom ažuriranja predloška!</string>
     <string name="uspjesnoBrisanjeTemplate">Uspješno ste obrisali predložak!</string>
     <string name="neuspjesnoBrisanjeTemplate">Neuspješno ste obrisali predložak!</string>
-
+    <string name="zapocniNoviTrening">Započni novi trening</string>
+    <string name="koristiPredlozak">Koristi predložak</string>
+    <string name="odaberiPRedlozak">Odaberite jedan predložak:</string>
+    <string name="ZavrsiTrening">Završi trening</string>
 
 
 </resources>

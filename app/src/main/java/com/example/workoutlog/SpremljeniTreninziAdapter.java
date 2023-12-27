@@ -16,12 +16,14 @@ import java.util.ArrayList;
 public class SpremljeniTreninziAdapter extends RecyclerView.Adapter<SpremljeniTreninziAdapter.MyViewHolder>{
     Context context;
     ArrayList<ExerciseTemplate> lexercise;
+    boolean hideEditRV;
     private final SpremljeniTreninziAdapterInterface recyclerViewInterface;
 
-    public SpremljeniTreninziAdapter(Context context, ArrayList<ExerciseTemplate> lexercise, SpremljeniTreninziAdapterInterface recyclerViewInterface ) {
+    public SpremljeniTreninziAdapter(Context context, ArrayList<ExerciseTemplate> lexercise, SpremljeniTreninziAdapterInterface recyclerViewInterface, boolean hideEditRV ) {
         this.context = context;
         this.lexercise = lexercise;
         this.recyclerViewInterface = recyclerViewInterface;
+        this.hideEditRV = hideEditRV;
     }
 
     @NonNull
@@ -36,6 +38,11 @@ public class SpremljeniTreninziAdapter extends RecyclerView.Adapter<SpremljeniTr
     public void onBindViewHolder(@NonNull SpremljeniTreninziAdapter.MyViewHolder holder, int position) {
 
         holder.tvImeTemplate.setText(lexercise.get(position).getTemplateName());
+        ImageView ivEditTemplateST = holder.itemView.findViewById(R.id.ivEditTemplateST);
+
+        if (hideEditRV) {
+            ivEditTemplateST.setImageResource(R.drawable.baseline_add_circle_24);
+        }
     }
 
     @Override

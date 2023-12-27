@@ -51,7 +51,7 @@ public class PrijedloziTreningaFragment extends Fragment implements SpremljeniTr
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new SpremljeniTreninziAdapter(getActivity(), exerciseTemplates, this);
+        adapter = new SpremljeniTreninziAdapter(getActivity(), exerciseTemplates, this, false);
         recyclerView.setAdapter(adapter);
 
 
@@ -105,6 +105,7 @@ public class PrijedloziTreningaFragment extends Fragment implements SpremljeniTr
         intent.putExtra("templateName", exerciseTemplates.get(position).getTemplateName());
         intent.putParcelableArrayListExtra("exerciseList", exerciseTemplates.get(position).getLexercise());
         intent.putExtra("nodeId", exerciseTemplates.get(position).getNodeId());
+        intent.putExtra("type", "editTemplate");
         startActivity(intent);
         //overridePendingTransition(0, 0);
     }

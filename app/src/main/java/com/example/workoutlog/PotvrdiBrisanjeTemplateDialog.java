@@ -22,7 +22,7 @@ public class PotvrdiBrisanjeTemplateDialog {
         builder.setView(dialogView);
 
         // Get the buttons from the custom layout
-        Button obrisiButton = dialogView.findViewById(R.id.alertObrisiTemplate);
+        Button obrisiButton = dialogView.findViewById(R.id.btnOdustaniOdabir);
         Button odustaniButton = dialogView.findViewById(R.id.alertOdustaniTemplate);
 
         // Set button click listeners

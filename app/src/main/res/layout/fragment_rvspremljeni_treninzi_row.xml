@@ -37,7 +37,8 @@
                 android:layout_height="40dp"
                 android:paddingEnd="10dp"
                 app:srcCompat="@drawable/baseline_edit_note_24"
-                app:tint="@color/gold" />
+                app:tint="@color/gold"
+                android:visibility="visible" />
 
         </LinearLayout>
 
