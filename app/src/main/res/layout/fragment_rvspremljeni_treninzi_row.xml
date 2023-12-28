@@ -23,7 +23,7 @@
             android:padding="20dp">
 
             <TextView
-                android:id="@+id/tvImeTemplate"
+                android:id="@+id/tvName"
                 android:layout_width="267dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

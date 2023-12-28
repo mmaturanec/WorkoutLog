@@ -9,6 +9,7 @@ public class ExerciseSingleton {
     private String SetImeTemplate = new String();
     private Boolean editingTemplate = false;
     private Boolean noviTrening = false;
+    private Boolean editingWorkout = false;
     private String nodeId = new String();
 
 
@@ -85,5 +86,12 @@ public class ExerciseSingleton {
 
     public void setPreuzetiDatum(String preuzetiDatum) {
         this.preuzetiDatum = preuzetiDatum;
+    }
+    public Boolean getEditingWorkout() {
+        return editingWorkout;
+    }
+
+    public void setEditingWorkout(Boolean editingWorkout) {
+        this.editingWorkout = editingWorkout;
     }
 }

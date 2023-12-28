@@ -72,6 +72,15 @@ public class NewTemplateMain extends AppCompatActivity implements NewTemplateMai
                 ExerciseSingleton.getInstance().setEditingTemplate(true);
 
             }
+            else if(type.equals("editWorkout"))
+            {
+                ExerciseSingleton.getInstance().setSetImeTemplate(bundle.getString("templateName"));
+                lexercise = bundle.getParcelableArrayList("exerciseList");
+                ExerciseSingleton.getInstance().setNodeId(bundle.getString("nodeId"));
+                ExerciseSingleton.getInstance().setLexercise(lexercise);
+                ExerciseSingleton.getInstance().setEditingWorkout(true);
+                ExerciseSingleton.getInstance().setPreuzetiDatum(bundle.getString("datum"));
+            }
             else if(type.equals("noviTrening")){
                 ExerciseSingleton.getInstance().setSetImeTemplate(bundle.getString("templateName"));
                 lexercise = bundle.getParcelableArrayList("exerciseList");
@@ -176,9 +185,9 @@ public class NewTemplateMain extends AppCompatActivity implements NewTemplateMai
                                     if (templateKey != null) {
                                         userExerciseTemplateRef.child(templateKey).setValue(exerciseTemplate)
                                                 .addOnSuccessListener(aVoid -> {
-                                                    ExerciseSingleton.destroyInstance();
+                                                    //ExerciseSingleton.destroyInstance();
                                                     Toast.makeText(NewTemplateMain.this, getString(R.string.uspjesnoSpremljenPredlozak), Toast.LENGTH_SHORT).show();
-                                                    Intent intentMainmenu = new Intent(NewTemplateMain.this, MainMenuActivity.class);
+                                                    Intent intentMainmenu = new Intent(NewTemplateMain.this, WorkoutSummary.class);
                                                     intentMainmenu.putExtra("INITIAL_FRAGMENT", 0);
                                                     startActivity(intentMainmenu);
                                                     overridePendingTransition(0, 0);
@@ -212,6 +221,19 @@ public class NewTemplateMain extends AppCompatActivity implements NewTemplateMai
 
                     Intent intentMainmenu = new Intent(NewTemplateMain.this, MainMenuActivity.class);
                     intentMainmenu.putExtra("INITIAL_FRAGMENT", 1);
+                    startActivity(intentMainmenu);
+                    overridePendingTransition(0, 0);
+                }
+                else if(ExerciseSingleton.getInstance().getEditingWorkout())
+                {
+                    ExerciseTemplate exerciseTemplate = new ExerciseTemplate(imeTemplate, lexercise, ExerciseSingleton.getInstance().getPreuzetiDatum());
+                    String nodeId = ExerciseSingleton.getInstance().getNodeId();
+                    updateExerciseWorkoutInDatabase(exerciseTemplate, nodeId);
+                    ExerciseSingleton.destroyInstance();
+                    Toast.makeText(NewTemplateMain.this, getString(R.string.uspjesnoAzuriranPredlozak), Toast.LENGTH_SHORT).show();
+
+                    Intent intentMainmenu = new Intent(NewTemplateMain.this, MainMenuActivity.class);
+                    intentMainmenu.putExtra("INITIAL_FRAGMENT", 0);
                     startActivity(intentMainmenu);
                     overridePendingTransition(0, 0);
                 }
@@ -334,5 +356,28 @@ public class NewTemplateMain extends AppCompatActivity implements NewTemplateMai
                     }
                 });
     }
+    private void updateExerciseWorkoutInDatabase(ExerciseTemplate exerciseTemplate, String nodeId) {
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
 
+        DatabaseReference exerciseTemplateRef = FirebaseDatabase.getInstance().getReference()
+                .child("user_exercise_history")
+                .child(currentUser.getUid()) // Replace currentUser with your user reference
+                .child(nodeId); // Provide the specific node ID to update
+
+        exerciseTemplateRef.setValue(exerciseTemplate)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        // The node has been updated successfully
+                        // Handle success as needed
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Handle any errors that occurred while updating
+                    }
+                });
+    }
 }

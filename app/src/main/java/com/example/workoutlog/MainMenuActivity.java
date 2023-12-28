@@ -46,6 +46,7 @@ public class MainMenuActivity extends AppCompatActivity  {
                 int currentTabPosition = tabLayout.getSelectedTabPosition();
                 if(currentTabPosition == 0)
                 {
+                    InfoODodavanjuVjezbiDialog.showInfoDialog(MainMenuActivity.this);
 
                 }
                 if(currentTabPosition == 1)

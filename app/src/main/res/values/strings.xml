@@ -50,12 +50,20 @@
     <string name="infoovjezbidialog3">Držite dodir na imenu kako bi ste obrisali zapis.</string>
     <string name="uspjesnaAktualizacijaBaze">Predložak je uspješno ažuriran!</string>
     <string name="neuspjesnaAktualizacijaBaze">Greška prilikom ažuriranja predloška!</string>
-    <string name="uspjesnoBrisanjeTemplate">Uspješno ste obrisali predložak!</string>
-    <string name="neuspjesnoBrisanjeTemplate">Neuspješno ste obrisali predložak!</string>
+    <string name="uspjesnoBrisanjeTemplate">Uspješno ste obrisali zapis!</string>
+    <string name="neuspjesnoBrisanjeTemplate">Neuspješno ste obrisali zapis!</string>
     <string name="zapocniNoviTrening">Započni novi trening</string>
     <string name="koristiPredlozak">Koristi predložak</string>
     <string name="odaberiPRedlozak">Odaberite jedan predložak:</string>
     <string name="ZavrsiTrening">Završi trening</string>
+    <string name="SazetakTreninga">Sažetak treninga</string>
+    <string name="UkupnoPodignuto">Ukupno podignuto kilaže:</string>
+    <string name="UkupnoPodignutoVj">Vježba s najviše podignute kilaže:</string>
+    <string name="UkupnoPonavljanja">Ukupno ponavljanja: </string>
+    <string name="UkupnoPonavljanjaVj">Vježba s najviše ponavljanja: </string>
+    <string name="ZatvoriSazetak">Zatvori sažetak</string>
+    <string name="TreninziNaDan">Treninzi na dan: </string>
+    <string name="NemaTreningaZaPrikaz">Nema treninga za prikaz</string>
 
 
 </resources>

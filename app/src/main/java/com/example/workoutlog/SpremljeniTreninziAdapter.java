@@ -10,7 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class SpremljeniTreninziAdapter extends RecyclerView.Adapter<SpremljeniTreninziAdapter.MyViewHolder>{
@@ -56,7 +55,7 @@ public class SpremljeniTreninziAdapter extends RecyclerView.Adapter<SpremljeniTr
         public MyViewHolder(@NonNull View itemView, SpremljeniTreninziAdapterInterface recyclerViewInterface) {
             super(itemView);
 
-            tvImeTemplate = itemView.findViewById(R.id.tvImeTemplate);
+            tvImeTemplate = itemView.findViewById(R.id.tvName);
             ivEditTemplateST = itemView.findViewById(R.id.ivEditTemplateST);
 
             ivEditTemplateST.setOnClickListener(new View.OnClickListener() {
