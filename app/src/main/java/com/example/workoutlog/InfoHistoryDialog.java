@@ -6,8 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 
-public class InfoODodavanjuVjezbiDialog {
-
+public class InfoHistoryDialog {
     private static AlertDialog dialog;
 
     public static void showInfoDialog(Context context) {
@@ -15,7 +14,7 @@ public class InfoODodavanjuVjezbiDialog {
 
         // Inflate the custom layout
         LayoutInflater inflater = LayoutInflater.from(context);
-        View dialogView = inflater.inflate(R.layout.info_o_dodavanju_vjezbi_dialog, null);
+        View dialogView = inflater.inflate(R.layout.info_history_dialog, null);
         builder.setView(dialogView);
 
         ImageView ivCloseDialogInfo = dialogView.findViewById(R.id.ivCloseDialogHistory);

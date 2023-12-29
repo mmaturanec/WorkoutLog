@@ -17,7 +17,7 @@
     <string name="UnesiteLozinkuOd6Znakova">Lozinka mora imati najmanje 6 znakova!</string>
     <string name="VecPostojiKorisnikSTomEmailAdresom">Već postoji korisnik s tom Email adresom!</string>
     <string name="PogresnoUneseniPodatci">Ne postoji korisnik s unesenim podatcima!</string>
-    <string name="SpremljeniTreninzi">Spremljeni treninzi</string>
+    <string name="SpremljeniTreninzi">Spremljeni predlošci</string>
     <string name="Dodajnoviprijedlogtreninga">Dodaj novi prijedlog treninga</string>
     <string name="DodajVjezbu">Dodaj Vježbu</string>
     <string name="SpremiVjezbu">Spremi Vježbu</string>
@@ -38,7 +38,7 @@
     <string name="ShowTezina">Težina: </string>
     <string name="tezinaKg">kg</string>
     <string name="Serije">Serije:</string>
-    <string name="SpremiTemplate">Spremi predložak</string>
+    <string name="SpremiTemplate">Spremi</string>
     <string name="ImeVjezbe">Ime vježbe:</string>
     <string name="Obrisi">Obriši</string>
     <string name="Odbaci">Odbaci</string>
@@ -64,6 +64,8 @@
     <string name="ZatvoriSazetak">Zatvori sažetak</string>
     <string name="TreninziNaDan">Treninzi na dan: </string>
     <string name="NemaTreningaZaPrikaz">Nema treninga za prikaz</string>
+    <string name="Povratak">Povratak</string>
+    <string name="KakoBiSteSortiraliTreninge">kako bi ste sortirali treninge po datumu.</string>
 
 
 </resources>
