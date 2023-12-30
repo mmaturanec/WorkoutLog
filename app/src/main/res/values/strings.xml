@@ -10,7 +10,7 @@
     <string name="imatekorisnickiracun">Imate korisnički račun?</string>
     <string name="noviTrening">Novi trening</string>
     <string name="prijedloziTreninga">Prijedlozi treninga</string>
-    <string name="Zdravlje">Zdravlje</string>
+    <string name="Zdravlje">Povijest treninga</string>
     <string name="Unesitesvapolja">Unesite sva polja!</string>
     <string name="Unesitejednakelozinke">Unesite jednake lozinke!</string>
     <string name="UnesiteispravnuEmailadresu">Unesite ispravnu Email adresu!</string>
@@ -66,6 +66,8 @@
     <string name="NemaTreningaZaPrikaz">Nema treninga za prikaz</string>
     <string name="Povratak">Povratak</string>
     <string name="KakoBiSteSortiraliTreninge">kako bi ste sortirali treninge po datumu.</string>
+    <string name="PretraziTreninge">Pretraži treninge</string>
+
 
 
 </resources>

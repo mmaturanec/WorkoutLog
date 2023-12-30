@@ -1,14 +1,20 @@
 package com.example.workoutlog;
 
+import android.content.Intent;
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,45 +36,69 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 
-public class HistoryActivity extends AppCompatActivity implements SpremljeniTreninziAdapterInterface, PotvrdiBrisanjeVjezbeDialog.DialogClickListener{
+
+public class HistoryFragment extends Fragment implements SpremljeniTreninziAdapterInterface, PotvrdiBrisanjeVjezbeDialog.DialogClickListener{
+
     ArrayList<ExerciseTemplate> exerciseTemplates = new ArrayList<>();
-    ImageView iwSortHistory, iwInfoHistory;
-    Button btnPovratakHistory;
+    ImageView iwSortHistory;
     RecyclerView recyclerView;
     HistoryRVAdapter adapter;
     TextView tvNemaTreningaHistory;
+    EditText etSearchHistory;
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_history);
-
-        iwSortHistory = findViewById(R.id.iwSortHistory);
-        iwInfoHistory = findViewById(R.id.iwInfoHistory);
-        btnPovratakHistory = findViewById(R.id.btnHistoryPovratak);
-        tvNemaTreningaHistory = findViewById(R.id.tvNemaTreningaHistory);
-
-        btnPovratakHistory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent mainMenu = new Intent(HistoryActivity.this, MainMenuActivity.class);
-                startActivity(mainMenu);
-                overridePendingTransition(0, 0);
-            }
-        });
-         recyclerView = findViewById(R.id.rvHistory);
-         adapter = new HistoryRVAdapter(this, exerciseTemplates, this);
-         recyclerView.setAdapter(adapter);
-         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_history, container, false);
+        iwSortHistory = view.findViewById(R.id.iwSortHistory);
+        tvNemaTreningaHistory = view.findViewById(R.id.tvNemaTreningaHistory);
+        etSearchHistory = view.findViewById(R.id.etSearchHistory);
+        recyclerView = view.findViewById(R.id.rvHistory);
+        adapter = new HistoryRVAdapter(getContext(), exerciseTemplates, this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         fetchExerciseTemplatesFromFirebase();
 
-        iwInfoHistory.setOnClickListener(new View.OnClickListener() {
+        etSearchHistory.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Not used
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String searchText = charSequence.toString().toLowerCase().trim();
+                filterExerciseTemplates(searchText);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // Not used
+            }
+        });
+        iwSortHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                InfoHistoryDialog.showInfoDialog(HistoryActivity.this);
+                if(exerciseTemplates.isEmpty())
+                {
+                    tvNemaTreningaHistory.setVisibility(View.VISIBLE);
+                    recyclerView.setVisibility(View.GONE);
+                }
+                else{
+                    tvNemaTreningaHistory.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.VISIBLE);
+                    Collections.reverse(exerciseTemplates);
+                    adapter.notifyDataSetChanged();
+                }
 
             }
         });
+        return view;
     }
     private void fetchExerciseTemplatesFromFirebase() {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -96,23 +126,6 @@ public class HistoryActivity extends AppCompatActivity implements SpremljeniTren
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 // Handle error
-            }
-        });
-        iwSortHistory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(exerciseTemplates.isEmpty())
-                {
-                    tvNemaTreningaHistory.setVisibility(View.VISIBLE);
-                    recyclerView.setVisibility(View.GONE);
-                }
-                else{
-                    tvNemaTreningaHistory.setVisibility(View.GONE);
-                    recyclerView.setVisibility(View.VISIBLE);
-                    Collections.reverse(exerciseTemplates);
-                    adapter.notifyDataSetChanged();
-                }
-
             }
         });
     }
@@ -147,7 +160,6 @@ public class HistoryActivity extends AppCompatActivity implements SpremljeniTren
         }
 
     }
-
     @Override
     public void onPositiveButtonClick(int position) {
         String nodeId = exerciseTemplates.get(position).getNodeId();
@@ -163,7 +175,7 @@ public class HistoryActivity extends AppCompatActivity implements SpremljeniTren
 
     @Override
     public void onItemClick(int position) {
-        Intent intent = new Intent(this, NewTemplateMain.class);
+        Intent intent = new Intent(getContext(), NewTemplateMain.class);
 
         intent.putExtra("templateName", exerciseTemplates.get(position).getTemplateName());
         intent.putParcelableArrayListExtra("exerciseList", exerciseTemplates.get(position).getLexercise());
@@ -175,7 +187,7 @@ public class HistoryActivity extends AppCompatActivity implements SpremljeniTren
 
     @Override
     public void onItemLongclick(int position) {
-        PotvrdiBrisanjeVjezbeDialog.showDeleteExerciseDialog(this, this, position);
+        PotvrdiBrisanjeVjezbeDialog.showDeleteExerciseDialog(getContext(), this, position);
 
     }
     private void deleteNodeFromDatabase(String nodeId) {
@@ -192,17 +204,37 @@ public class HistoryActivity extends AppCompatActivity implements SpremljeniTren
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Toast.makeText(HistoryActivity.this, getResources().getString(R.string.uspjesnoBrisanjeTemplate), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), getResources().getString(R.string.uspjesnoBrisanjeTemplate), Toast.LENGTH_SHORT).show();
 
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(HistoryActivity.this, getResources().getString(R.string.neuspjesnoBrisanjeTemplate), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), getResources().getString(R.string.neuspjesnoBrisanjeTemplate), Toast.LENGTH_SHORT).show();
                         }
                     });
         } else {
         }
     }
+    private void filterExerciseTemplates(String searchText) {
+        ArrayList<ExerciseTemplate> filteredList = new ArrayList<>();
+
+        for (ExerciseTemplate template : exerciseTemplates) {
+            if (template.getTemplateName().toLowerCase().contains(searchText)) {
+                filteredList.add(template);
+            }
+        }
+
+        if (filteredList.isEmpty()) {
+            tvNemaTreningaHistory.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+        } else {
+            tvNemaTreningaHistory.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+        }
+
+        adapter.filterList(filteredList);
+    }
+
 }

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".HistoryActivity">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvHistory"
+        android:layout_width="374dp"
+        android:layout_height="587dp"
+        android:layout_marginBottom="8dp"
+        android:paddingTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvNemaTreningaHistory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/NemaTreningaZaPrikaz"
+        android:textColor="@color/gold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.54" />
+
+    <LinearLayout
+        android:layout_width="413dp"
+        android:layout_height="69dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="360dp"
+            android:layout_height="match_parent"
+            android:padding="7dp"
+            app:counterTextColor="@color/gold"
+            app:endIconTint="@color/gold"
+            app:helperTextTextColor="@color/gold"
+            app:hintTextColor="@color/gold"
+            app:placeholderTextColor="@color/gold"
+            app:prefixTextColor="@color/gold"
+            app:startIconTint="@color/gold"
+            app:suffixTextColor="@color/gold">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etSearchHistory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/PretraziTreninge"
+                android:textColor="@color/gold"
+                android:textColorHighlight="@color/gold"
+                android:textColorHint="@color/gold"
+                android:textColorLink="@color/gold" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/iwSortHistory"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="12dp"
+            app:srcCompat="@drawable/baseline_filter_list_24"
+            app:tint="@color/gold" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

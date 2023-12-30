@@ -70,11 +70,7 @@ public class NoviTreningFragment extends Fragment implements SpremljeniTreninziA
         calendarView.setMaxDate(maxDate);
 
 
-        ivGetHistory = view.findViewById(R.id.ivGetHistory);
-        ivGetHistory.setOnClickListener(v ->{
-            Intent intent = new Intent(requireActivity(), HistoryActivity.class);
-            startActivity(intent);
-        });
+
         tvTreninziNaDan = view.findViewById(R.id.tvTreninziNaDan);
         Date today = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.M.yyyy.", Locale.getDefault());

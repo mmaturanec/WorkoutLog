@@ -87,4 +87,9 @@ public class HistoryRVAdapter extends RecyclerView.Adapter<HistoryRVAdapter.MyVi
         modifiedDate += ".";
         return modifiedDate;
     }
+    public void filterList(ArrayList<ExerciseTemplate> filteredList) {
+        lexercises = filteredList;
+        notifyDataSetChanged();
+    }
+
 }

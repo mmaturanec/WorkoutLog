@@ -18,7 +18,7 @@ public class MyViewPagerAdapter extends FragmentStateAdapter {
             case 1:
                 return new PrijedloziTreningaFragment();
             case 2:
-                return new ZdravljeFragment();
+                return new HistoryFragment();
             default:
                 return new NoviTreningFragment();
         }

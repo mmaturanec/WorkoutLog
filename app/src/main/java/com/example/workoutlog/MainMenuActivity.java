@@ -56,7 +56,7 @@ public class MainMenuActivity extends AppCompatActivity  {
                 }
                 if(currentTabPosition == 2)
                 {
-
+                    InfoHistoryDialog.showInfoDialog(MainMenuActivity.this);
                 }
             }
         });
