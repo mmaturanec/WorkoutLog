@@ -67,7 +67,17 @@
     <string name="Povratak">Povratak</string>
     <string name="KakoBiSteSortiraliTreninge">kako bi ste sortirali treninge po datumu.</string>
     <string name="PretraziTreninge">Pretraži treninge</string>
-
+    <string name="ProjeniProfilnu">Promjeni profilnu sliku</string>
+    <string name="UrediProfil">Uredi profil</string>
+    <string name="Slikaj">Snimi fotografiju</string>
+    <string name="Pozdrav">Pozdrav </string>
+    <string name="Ime">Ime</string>
+    <string name="Prezime">Prezime </string>
+    <string name="Lozinka">Lozinka </string>
+    <string name="Email">E-mail</string>
+    <string name="Postaviteprofil">Postavite profil</string>
+    <string name="Odaberiteprofilnusliku">Odaberite profilnu sliku</string>
+    <string name="PostaviProfil">Postavi profil</string>
 
 
 </resources>
