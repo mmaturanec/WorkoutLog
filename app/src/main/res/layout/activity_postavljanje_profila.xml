@@ -35,11 +35,13 @@
         android:id="@+id/btnPostaviProfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
         android:backgroundTint="@color/gold"
         android:text="@string/PostaviProfil"
         android:textColor="@color/black"
-        tools:layout_editor_absoluteX="139dp"
-        tools:layout_editor_absoluteY="654dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/ivOdaberiProfilnu"

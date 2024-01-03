@@ -1,5 +1,6 @@
 package com.example.workoutlog;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
@@ -10,9 +11,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainMenuActivity extends AppCompatActivity  {
 
@@ -34,11 +42,50 @@ public class MainMenuActivity extends AppCompatActivity  {
         infoButtonMainMenu = findViewById(R.id.infoButtonMainMenu);
         int initialFragmentPosition = getIntent().getIntExtra("INITIAL_FRAGMENT", 0);
 
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = auth.getCurrentUser();
+        if (currentUser != null) {
+            String userUid = currentUser.getUid();
+            String Email = currentUser.getEmail();
+
+            DatabaseReference userExerciseTemplateRef = FirebaseDatabase.getInstance().getReference()
+                    .child("user_profile")
+                    .child(userUid);
+
+            userExerciseTemplateRef.orderByChild("email").equalTo(Email).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            {
+                                UserInformation userInfo = snapshot.getValue(UserInformation.class);
+
+                                UserSingleton.getInstance().setUser(userInfo);
+                            }
+
+                        }
+                    }else {
+                        Intent inentPostaviProfil = new Intent(MainMenuActivity.this, PostavljanjeProfilaActivity.class);
+                        overridePendingTransition(0, 0);
+                        startActivity(inentPostaviProfil);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Handle potential database error
+                }
+            });
+        }
+
+
+
         if( initialFragmentPosition != 0)
         {
             viewPager2.post(() -> viewPager2.setCurrentItem(initialFragmentPosition, false));
 
         }
+
 
         infoButtonMainMenu.setOnClickListener(new View.OnClickListener() {
             @Override

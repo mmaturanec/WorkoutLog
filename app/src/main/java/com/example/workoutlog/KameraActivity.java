@@ -22,6 +22,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -30,9 +31,13 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.common.util.concurrent.ListenableFuture;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -51,6 +56,7 @@ public class KameraActivity extends AppCompatActivity {
     ImageCapture imageCapture;
     File outputDirectory;
     ImageView ivFlipCamera, ivBackCamera, ivBrowseHistory;
+    String Type="";
 
     //dio sa camerax - preview
     ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
@@ -70,6 +76,15 @@ public class KameraActivity extends AppCompatActivity {
         ivFlipCamera = findViewById(R.id.ivFlipCamera);
         ivBackCamera = findViewById(R.id.ivBackCamera);
         ivBrowseHistory = findViewById(R.id.ivBrowseHistory);
+
+        final Bundle bundle = getIntent().getExtras();
+
+        if(bundle != null)
+        {
+            Type = bundle.getString("type");
+        }
+
+
 
         ivFlipCamera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,14 +123,20 @@ public class KameraActivity extends AppCompatActivity {
                             @Override
                             public void onImageSaved(@NonNull ImageCapture.OutputFileResults outputFileResults) {
                                 Uri savedUri = Uri.fromFile(photoFile);
-                                //Uspjesno sprema u galeriju, potrebno spremit u firebase i otvorit intent settings!
-                                /*
-                                Intent otvoriFragmente = new Intent(getApplicationContext(), CreateNewRecordActivity.class);
-                                otvoriFragmente.putExtra("savedUri", savedUri.toString());
-                                startActivity(otvoriFragmente);
+                                if(Type.equals("setProfilePicture"))
+                                {
 
-                                 */
-
+                                Intent intentPostavljanjeProfila = new Intent(getApplicationContext(), PostavljanjeProfilaActivity.class);
+                                intentPostavljanjeProfila.putExtra("savedUri", savedUri.toString());
+                                intentPostavljanjeProfila.putExtra("isBackCamera", isBackCamera);
+                                startActivity(intentPostavljanjeProfila);
+                                }
+                                else{
+                                    Intent intentPromjeniSliku = new Intent(getApplicationContext(), SettingsActivity.class);
+                                    intentPromjeniSliku.putExtra("savedUri", savedUri.toString());
+                                    intentPromjeniSliku.putExtra("isBackCamera", isBackCamera);
+                                    startActivity(intentPromjeniSliku);
+                                }
                             }
 
                             @Override

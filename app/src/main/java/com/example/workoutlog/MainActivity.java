@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
+            //ovdje ide logika za to
             Intent MainMenu = new Intent(MainActivity.this, MainMenuActivity.class);
             startActivity(MainMenu);
             overridePendingTransition(0, 0);

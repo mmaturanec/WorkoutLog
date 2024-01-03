@@ -78,6 +78,9 @@
     <string name="Postaviteprofil">Postavite profil</string>
     <string name="Odaberiteprofilnusliku">Odaberite profilnu sliku</string>
     <string name="PostaviProfil">Postavi profil</string>
+    <string name="KorisnikVecImaProfil">Korisnik već ima profil!</string>
+    <string name="UnesiIme">Unesite ime</string>
+    <string name="UnesiPrezime">Unesite prezime</string>
 
 
 </resources>
