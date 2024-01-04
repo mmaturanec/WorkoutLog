@@ -16,6 +16,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private String sEmail;
     private String sPassword;
     private FirebaseAuth mAuth;
+    private TextView tvResetLozinke;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +43,15 @@ public class MainActivity extends AppCompatActivity {
          btnPrijava = findViewById(R.id.btnPrijava);
         etLoginUserName = findViewById(R.id.etLoginUserName);
         etLoginLozinka = findViewById(R.id.etLoginLozinka);
+        tvResetLozinke = findViewById(R.id.tvZaboravljenaLozinka);
+
+        tvResetLozinke.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PasswordResetDialog.showInfoDialog(MainActivity.this);
+
+            }
+        });
 
         tvLoginRegistriraj.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,6 +107,43 @@ public class MainActivity extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
+/*
+            String userUid = currentUser.getUid();
+            String Email = currentUser.getEmail();
+
+            DatabaseReference userExerciseTemplateRef = FirebaseDatabase.getInstance().getReference()
+                    .child("user_profile")
+                    .child(userUid);
+
+            userExerciseTemplateRef.orderByChild("email").equalTo(Email).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            {
+                                UserInformation userInfo = snapshot.getValue(UserInformation.class);
+
+                                UserSingleton.getInstance().setUser(userInfo);
+                            }
+
+                        }
+                    }else {
+                        Intent inentPostaviProfil = new Intent(MainActivity.this, PostavljanjeProfilaActivity.class);
+                        overridePendingTransition(0, 0);
+                        startActivity(inentPostaviProfil);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Handle potential database error
+                }
+            });
+
+
+
+ */
+
             //ovdje ide logika za to
             Intent MainMenu = new Intent(MainActivity.this, MainMenuActivity.class);
             startActivity(MainMenu);

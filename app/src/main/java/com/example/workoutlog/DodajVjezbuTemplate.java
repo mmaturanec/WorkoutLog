@@ -19,7 +19,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DodajVjezbuTemplate extends AppCompatActivity {
+public class DodajVjezbuTemplate extends AppCompatActivity implements DodajVjezbuTemplateAdapter.OnSetRemovedListener {
     private Button btnDodajVjezbu;
     private Button btnDodajSeriju;
     private EditText etImeVjezbeTemplate;
@@ -55,6 +55,7 @@ public class DodajVjezbuTemplate extends AppCompatActivity {
 
 
         DodajVjezbuTemplateAdapter adapterRV = new DodajVjezbuTemplateAdapter(this, lexercise);
+        adapterRV.setListener(this);
         recyclerView.setAdapter(adapterRV);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         tvBrojSerija.setText(""+lexercise.size());
@@ -67,7 +68,6 @@ public class DodajVjezbuTemplate extends AppCompatActivity {
                 // Update the row count when the entire dataset changes
                 int rowCount = adapterRV.getItemCount();
                 tvBrojSerija.setText(String.valueOf(rowCount));
-
             }
 
             @Override
@@ -86,12 +86,14 @@ public class DodajVjezbuTemplate extends AppCompatActivity {
                 int rowCount = adapterRV.getItemCount();
                 tvBrojSerija.setText(String.valueOf(rowCount));
 
+
             }
         });
 
         btnDodajSeriju.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 adapterRV.addNewRow();
             }
         });
@@ -101,6 +103,9 @@ public class DodajVjezbuTemplate extends AppCompatActivity {
 
                // tvBrojSerija.setText(""+(lexercise.size()+1));
                 adapterRV.addNewRow();
+                if (lexercise.size() > 5) {
+                    btnDodajSeriju.setVisibility(View.GONE);
+                }
             }
 
         });
@@ -125,6 +130,7 @@ public class DodajVjezbuTemplate extends AppCompatActivity {
                     updatedWeights.add(weight);
                 }
 
+
                 // Update the adapter with the collected values and refresh RecyclerView
                 adapterRV.updateExerciseSetValues(updatedReps, updatedWeights);
 
@@ -132,6 +138,11 @@ public class DodajVjezbuTemplate extends AppCompatActivity {
                 if(TextUtils.isEmpty(nazivVjezbe))
                 {
                     Toast.makeText(DodajVjezbuTemplate.this, getResources().getString(R.string.UnesiImeVjezbe), Toast.LENGTH_SHORT).show();
+
+                }
+                else if(lexercise.isEmpty())
+                {
+                    Toast.makeText(DodajVjezbuTemplate.this, getResources().getString(R.string.DodajteBaremJednuSeriju), Toast.LENGTH_SHORT).show();
 
                 }
                 else if(checkForEmptySet(exerciseSets))
@@ -175,5 +186,14 @@ public class DodajVjezbuTemplate extends AppCompatActivity {
             }
         }
         return false;
+    }
+
+    @Override
+    public void onSetRemoved(int newSize) {
+        if (newSize <= 5) {
+            btnDodajSeriju.setVisibility(View.VISIBLE);
+        } else {
+            btnDodajSeriju.setVisibility(View.GONE);
+        }
     }
 }

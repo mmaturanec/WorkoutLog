@@ -80,6 +80,8 @@ public class MainMenuActivity extends AppCompatActivity  {
 
 
 
+
+
         if( initialFragmentPosition != 0)
         {
             viewPager2.post(() -> viewPager2.setCurrentItem(initialFragmentPosition, false));

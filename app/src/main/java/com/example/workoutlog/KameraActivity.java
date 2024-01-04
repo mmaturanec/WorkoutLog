@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -50,6 +51,8 @@ public class KameraActivity extends AppCompatActivity {
     private static final String TAG = "CameraXBasic";
     private static final String FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS";
     private boolean isBackCamera = true;
+    private static final int PICK_IMAGE = 100;
+
     Button camera_capture_button;
     PreviewView view_finder;
     ExecutorService executor;
@@ -57,6 +60,7 @@ public class KameraActivity extends AppCompatActivity {
     File outputDirectory;
     ImageView ivFlipCamera, ivBackCamera, ivBrowseHistory;
     String Type="";
+    String Ime, Prezime;
 
     //dio sa camerax - preview
     ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
@@ -77,11 +81,25 @@ public class KameraActivity extends AppCompatActivity {
         ivBackCamera = findViewById(R.id.ivBackCamera);
         ivBrowseHistory = findViewById(R.id.ivBrowseHistory);
 
+
+        ivBrowseHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Open gallery or file picker
+                Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+                startActivityForResult(gallery, PICK_IMAGE);
+            }
+        });
+
+
+
         final Bundle bundle = getIntent().getExtras();
 
         if(bundle != null)
         {
             Type = bundle.getString("type");
+            Ime = bundle.getString("ime");
+            Prezime = bundle.getString("prezime");
         }
 
 
@@ -129,6 +147,8 @@ public class KameraActivity extends AppCompatActivity {
                                 Intent intentPostavljanjeProfila = new Intent(getApplicationContext(), PostavljanjeProfilaActivity.class);
                                 intentPostavljanjeProfila.putExtra("savedUri", savedUri.toString());
                                 intentPostavljanjeProfila.putExtra("isBackCamera", isBackCamera);
+                                intentPostavljanjeProfila.putExtra("ime", Ime);
+                                intentPostavljanjeProfila.putExtra("prezime", Prezime);
                                 startActivity(intentPostavljanjeProfila);
                                 }
                                 else{
@@ -259,5 +279,17 @@ public class KameraActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if (resultCode == Activity.RESULT_OK && requestCode == PICK_IMAGE) {
+            // Handle the selected image URI here
+            Uri imageUri = data.getData();
+            Intent intentPromjeniSliku = new Intent(getApplicationContext(), SettingsActivity.class);
+            intentPromjeniSliku.putExtra("savedUri", imageUri.toString());
+            intentPromjeniSliku.putExtra("isBackCamera", isBackCamera);
+            startActivity(intentPromjeniSliku);
+        }
+    }
 }

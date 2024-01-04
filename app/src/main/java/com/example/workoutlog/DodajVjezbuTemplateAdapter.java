@@ -14,6 +14,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class DodajVjezbuTemplateAdapter extends RecyclerView.Adapter<DodajVjezbuTemplateAdapter.MyViewHolder>{
+    public interface OnSetRemovedListener {
+        void onSetRemoved(int newSize);
+    }
+
+    private OnSetRemovedListener listener;
+
+    public void setListener(OnSetRemovedListener listener) {
+        this.listener = listener;
+    }
     Context context;
     ArrayList<ExerciseSet> lexercise;
 
@@ -96,6 +105,9 @@ public class DodajVjezbuTemplateAdapter extends RecyclerView.Adapter<DodajVjezbu
         lexercise.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, lexercise.size());
+        if (listener != null) {
+            listener.onSetRemoved(lexercise.size());
+        }
     }
     public int getRowCount() {
         return lexercise.size();

@@ -90,7 +90,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="168dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="45dp"
         android:layout_marginEnd="152dp"
         android:backgroundTint="@color/gold"
         android:text="@string/prijava"
@@ -124,4 +124,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnPrijava"
         app:layout_constraintVertical_bias="0.505" />
+
+    <TextView
+        android:id="@+id/tvZaboravljenaLozinka"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/ZaboravljenaLozinka"
+        android:textColor="@color/gold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tiRegisterLozinka" />
 </androidx.constraintlayout.widget.ConstraintLayout>

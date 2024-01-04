@@ -32,6 +32,7 @@ public class SettingsActivity extends AppCompatActivity {
     private Button btnOdjava, btnUrediProfil;
     private ImageView ivProfile, ivBackSettings;
     private TextView tvPromjeniProfilnu, tvime;
+    StorageReference storageRef;
     String ImageUri;
 
     @Override
@@ -52,8 +53,10 @@ public class SettingsActivity extends AppCompatActivity {
 
         UserInformation userInformation = userSingleton.getUser();
 
+        UserInformation userInfo = UserSingleton.getInstance().getUser();
+        if (userInfo != null) {
+             storageRef = FirebaseStorage.getInstance().getReference().child("images/" + userInformation.getProfilePicture());
 
-        StorageReference storageRef = FirebaseStorage.getInstance().getReference().child("images/" + userInformation.getProfilePicture());
 
 
         final Bundle bundle = getIntent().getExtras();
@@ -102,7 +105,9 @@ public class SettingsActivity extends AppCompatActivity {
         }
         tvime.setText(userInformation.getIme());
 
+        } else {
 
+        }
         btnUrediProfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

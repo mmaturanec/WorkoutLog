@@ -59,6 +59,16 @@ public class PostavljanjeProfilaActivity extends AppCompatActivity {
         final Bundle bundle = getIntent().getExtras();
 
         if (bundle != null) {
+            String ime = bundle.getString("ime");
+            String prezime = bundle.getString("prezime");
+            if(!TextUtils.isEmpty(ime))
+            {
+                etOdaberiIme.setText(ime);
+            }
+            if(!TextUtils.isEmpty(prezime))
+            {
+                etOdaberiPrezime.setText(prezime);
+            }
             ImageUri = bundle.getString("savedUri");
             Boolean BackCamera = bundle.getBoolean("isBackCamera");
             String[] projection = new String[]{
@@ -92,6 +102,9 @@ public class PostavljanjeProfilaActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intentKamera = new Intent(PostavljanjeProfilaActivity.this, KameraActivity.class);
                 intentKamera.putExtra("type", "setProfilePicture");
+                intentKamera.putExtra("ime", etOdaberiIme.getText().toString());
+                intentKamera.putExtra("prezime", etOdaberiIme.getText().toString());
+
                 startActivity(intentKamera);
                 overridePendingTransition(0, 0);
             }
@@ -101,6 +114,8 @@ public class PostavljanjeProfilaActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intentKamera = new Intent(PostavljanjeProfilaActivity.this, KameraActivity.class);
                 intentKamera.putExtra("type", "setProfilePicture");
+                intentKamera.putExtra("ime", etOdaberiIme.getText().toString());
+                intentKamera.putExtra("prezime", etOdaberiPrezime.getText().toString());
                 startActivity(intentKamera);
                 overridePendingTransition(0, 0);
             }
@@ -110,6 +125,8 @@ public class PostavljanjeProfilaActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intentKamera = new Intent(PostavljanjeProfilaActivity.this, KameraActivity.class);
                 intentKamera.putExtra("type", "setProfilePicture");
+                intentKamera.putExtra("ime", etOdaberiIme.getText().toString());
+                intentKamera.putExtra("prezime", etOdaberiIme.getText().toString());
                 startActivity(intentKamera);
                 overridePendingTransition(0, 0);
             }
