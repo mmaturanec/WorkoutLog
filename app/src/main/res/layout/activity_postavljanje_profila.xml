@@ -73,13 +73,25 @@
         android:paddingEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvOdaberiProfilnu">
+        app:layout_constraintTop_toBottomOf="@+id/tvOdaberiProfilnu"
+        app:boxStrokeColor="@color/gold"
+        app:counterTextColor="@color/white"
+        app:cursorColor="@color/gold"
+        app:helperTextTextColor="@color/white"
+        app:hintTextColor="@color/white"
+        app:placeholderTextColor="@color/white"
+        app:prefixTextColor="@color/white"
+        app:suffixTextColor="@color/white"
+        >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etOdaberiIme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/Ime" />
+            android:hint="@string/Ime"
+            android:textColor="@color/white"
+            android:textColorHighlight="@color/white"
+            android:textColorLink="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -90,13 +102,25 @@
         android:paddingEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout5">
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout5"
+        app:boxStrokeColor="@color/gold"
+        app:counterTextColor="@color/white"
+        app:cursorColor="@color/gold"
+        app:helperTextTextColor="@color/white"
+        app:hintTextColor="@color/white"
+        app:placeholderTextColor="@color/white"
+        app:prefixTextColor="@color/white"
+        app:suffixTextColor="@color/white"
+        >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etOdaberiPrezime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/Prezime" />
+            android:hint="@string/Prezime"
+            android:textColor="@color/white"
+            android:textColorHighlight="@color/white"
+            android:textColorLink="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

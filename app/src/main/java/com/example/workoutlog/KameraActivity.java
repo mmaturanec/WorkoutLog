@@ -155,6 +155,7 @@ public class KameraActivity extends AppCompatActivity {
                                     Intent intentPromjeniSliku = new Intent(getApplicationContext(), SettingsActivity.class);
                                     intentPromjeniSliku.putExtra("savedUri", savedUri.toString());
                                     intentPromjeniSliku.putExtra("isBackCamera", isBackCamera);
+                                    intentPromjeniSliku.putExtra("updateUser", true);
                                     startActivity(intentPromjeniSliku);
                                 }
                             }

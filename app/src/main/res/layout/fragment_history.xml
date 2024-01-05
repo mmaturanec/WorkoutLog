@@ -9,8 +9,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvHistory"
-        android:layout_width="374dp"
-        android:layout_height="587dp"
+        android:layout_width="375dp"
+        android:layout_height="637dp"
         android:layout_marginBottom="8dp"
         android:paddingTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -43,24 +43,23 @@
             android:layout_width="360dp"
             android:layout_height="match_parent"
             android:padding="7dp"
-            app:counterTextColor="@color/gold"
-            app:endIconTint="@color/gold"
-            app:helperTextTextColor="@color/gold"
-            app:hintTextColor="@color/gold"
-            app:placeholderTextColor="@color/gold"
-            app:prefixTextColor="@color/gold"
-            app:startIconTint="@color/gold"
-            app:suffixTextColor="@color/gold">
+            app:boxStrokeColor="@color/gold"
+            app:counterTextColor="@color/white"
+            app:cursorColor="@color/gold"
+            app:helperTextTextColor="@color/white"
+            app:hintTextColor="@color/white"
+            app:placeholderTextColor="@color/white"
+            app:prefixTextColor="@color/white"
+            app:suffixTextColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etSearchHistory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/PretraziTreninge"
-                android:textColor="@color/gold"
-                android:textColorHighlight="@color/gold"
-                android:textColorHint="@color/gold"
-                android:textColorLink="@color/gold" />
+                android:textColor="@color/white"
+                android:textColorHighlight="@color/white"
+                android:textColorLink="@color/white" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

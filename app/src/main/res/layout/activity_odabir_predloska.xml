@@ -26,6 +26,7 @@
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/red"
         android:text="@string/Odustani"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

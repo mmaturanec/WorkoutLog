@@ -27,13 +27,23 @@
         android:paddingEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:boxStrokeColor="@color/gold"
+        app:counterTextColor="@color/white"
+        app:cursorColor="@color/gold"
+        app:helperTextTextColor="@color/white"
+        app:hintTextColor="@color/white"
+        app:placeholderTextColor="@color/white"
+        app:prefixTextColor="@color/white"
+        app:suffixTextColor="@color/white">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edImeP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/Ime" />
+            android:hint="@string/Ime"  android:textColor="@color/white"
+            android:textColorHighlight="@color/white"
+            android:textColorLink="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -45,13 +55,31 @@
         android:paddingEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" app:boxStrokeColor="@color/gold"
+        app:counterTextColor="@color/white"
+        app:cursorColor="@color/gold"
+        app:helperTextTextColor="@color/white"
+        app:hintTextColor="@color/white"
+        app:placeholderTextColor="@color/white"
+        app:prefixTextColor="@color/white"
+        app:suffixTextColor="@color/white"
+        >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPrezimeP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/Prezime" />
+            android:hint="@string/Prezime"  android:textColor="@color/white"
+            android:textColorHighlight="@color/white"
+            android:textColorLink="@color/white"  app:boxStrokeColor="@color/gold"
+            app:counterTextColor="@color/white"
+            app:cursorColor="@color/gold"
+            app:helperTextTextColor="@color/white"
+            app:hintTextColor="@color/white"
+            app:placeholderTextColor="@color/white"
+            app:prefixTextColor="@color/white"
+            app:suffixTextColor="@color/white"
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -63,7 +91,14 @@
         android:paddingEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout3" app:boxStrokeColor="@color/gold"
+        app:counterTextColor="@color/white"
+        app:cursorColor="@color/gold"
+        app:helperTextTextColor="@color/white"
+        app:hintTextColor="@color/white"
+        app:placeholderTextColor="@color/white"
+        app:prefixTextColor="@color/white"
+        app:suffixTextColor="@color/white">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etEmailP"

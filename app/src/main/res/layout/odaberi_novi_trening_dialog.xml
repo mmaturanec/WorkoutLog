@@ -8,50 +8,44 @@
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
-    <com.google.android.material.card.MaterialCardView
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/black"
-        app:cardBackgroundColor="@color/black"
-        app:strokeColor="@color/gold"
-        app:strokeWidth="3dp">
+        android:background="@color/black"
+        android:backgroundTint="@color/gold"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/btnOdaberiPredlozak"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
-            android:background="@color/black"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:backgroundTint="@color/white"
+            android:text="@string/koristiPredlozak"
+            android:textColor="@color/black" />
 
-            <Button
-                android:id="@+id/btnOdaberiPredlozak"
-                android:layout_width="170dp"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/gold"
-                android:text="@string/koristiPredlozak"
-                android:textColor="@color/black" />
+        <Button
+            android:id="@+id/btnOdaberiNoviTrening"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:backgroundTint="@color/white"
+            android:text="@string/noviTrening"
+            android:textColor="@color/black" />
 
-            <Button
-                android:id="@+id/btnOdaberiNoviTrening"
-                android:layout_width="170dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:backgroundTint="@color/gold"
-                android:text="@string/noviTrening"
-                android:textColor="@color/black" />
-
-            <Button
-                android:id="@+id/btnOdustaniOdabir"
-                android:layout_width="170dp"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/red"
-                android:text="@string/Odustani" />
+        <Button
+            android:id="@+id/btnOdustaniOdabir"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/red"
+            android:text="@string/Odustani"
+            android:textColor="@color/white" />
 
 
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
 
 
 </LinearLayout>

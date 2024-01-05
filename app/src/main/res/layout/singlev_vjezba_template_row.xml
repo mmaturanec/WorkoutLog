@@ -18,8 +18,8 @@
             android:background="@color/black">
 
             <LinearLayout
-                android:layout_width="427dp"
-                android:layout_height="28dp"
+                android:layout_width="413dp"
+                android:layout_height="40dp"
                 android:orientation="horizontal"
                 android:padding="4dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -28,38 +28,50 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="122dp"
+                    android:id="@+id/textView4"
+                    android:layout_width="20dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="29dp"
+                    android:layout_height="28dp"
                     android:layout_weight="1"
-                    android:gravity="end"
-                    android:text="@string/ShowTezina"
-                    android:textColor="@color/white" />
+                    app:tint="@color/white"
+                    app:srcCompat="@drawable/weight_svgrepo_com" />
 
                 <TextView
                     android:id="@+id/tvSingleWeight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="70dp"
+                    android:layout_height="29dp"
                     android:layout_weight="1"
+                    android:gravity="start"
                     android:text="TextView"
                     android:textColor="@color/white" />
 
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="57dp"
+                    android:layout_height="29dp"
                     android:layout_weight="1"
-                    android:gravity="end"
-                    android:text="@string/ShowBrojPonavljanja"
-                    android:textColor="@color/white" />
+                    app:srcCompat="@drawable/baseline_repeat_24" />
 
                 <TextView
                     android:id="@+id/tvSingleReps"
-                    android:layout_width="88dp"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="start"
                     android:text="TextView"
                     android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/textView21"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

@@ -3,6 +3,15 @@
     <style name="Base.Theme.WorkoutLog" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/black</item>
+
+    </style>
+    <style name="CalenderViewCustom" parent="Theme.AppCompat">
+        <item name="colorControlActivated">@color/gold</item>
+        <item name="android:textColorPrimary">@color/black</item>
+    </style>
+    <style name="CalenderViewWeekCustomText" parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="Theme.WorkoutLog" parent="Base.Theme.WorkoutLog" />

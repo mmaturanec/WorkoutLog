@@ -39,12 +39,14 @@
         android:layout_marginTop="50dp"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        app:counterTextColor="@color/white"
-        app:helperTextTextColor="@color/white"
-        app:hintTextColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvRegisterRegistracija"
+        app:boxStrokeColor="@color/gold"
+        app:counterTextColor="@color/white"
+        app:cursorColor="@color/gold"
+        app:helperTextTextColor="@color/white"
+        app:hintTextColor="@color/white"
         app:placeholderTextColor="@color/white"
         app:prefixTextColor="@color/white"
         app:suffixTextColor="@color/white">
@@ -56,7 +58,7 @@
             android:hint="@string/unesiteKorisnickoIme"
             android:textColor="@color/white"
             android:textColorHighlight="@color/white"
-            android:textColorLink="@color/white" />
+            android:textColorLink="@color/white"  />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -66,12 +68,14 @@
         android:layout_marginTop="25dp"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        app:counterTextColor="@color/white"
-        app:helperTextTextColor="@color/white"
-        app:hintTextColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tiRegisterUsername"
+        app:boxStrokeColor="@color/gold"
+        app:counterTextColor="@color/white"
+        app:cursorColor="@color/gold"
+        app:helperTextTextColor="@color/white"
+        app:hintTextColor="@color/white"
         app:placeholderTextColor="@color/white"
         app:prefixTextColor="@color/white"
         app:suffixTextColor="@color/white">
@@ -82,9 +86,10 @@
             android:layout_height="wrap_content"
             android:hint="@string/unesiteLozinku"
             android:inputType="textPassword"
+
             android:textColor="@color/white"
             android:textColorHighlight="@color/white"
-            android:textColorLink="@color/white" />
+            android:textColorLink="@color/white"  />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -95,12 +100,15 @@
         android:hint="@string/ponovnounesiteLozinku"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        app:counterTextColor="@color/white"
-        app:helperTextTextColor="@color/white"
-        app:hintTextColor="@color/white"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tiRegisterLozinka"
+        app:boxStrokeColor="@color/gold"
+        app:counterTextColor="@color/white"
+        app:cursorColor="@color/gold"
+        app:helperTextTextColor="@color/white"
+        app:hintTextColor="@color/white"
         app:placeholderTextColor="@color/white"
         app:prefixTextColor="@color/white"
         app:suffixTextColor="@color/white">
@@ -113,7 +121,7 @@
             android:inputType="textPassword"
             android:textColor="@color/white"
             android:textColorHighlight="@color/white"
-            android:textColorLink="@color/white" />
+            android:textColorLink="@color/white"  />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

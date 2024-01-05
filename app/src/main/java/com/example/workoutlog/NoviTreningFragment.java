@@ -1,6 +1,7 @@
 package com.example.workoutlog;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -59,6 +60,8 @@ public class NoviTreningFragment extends Fragment implements SpremljeniTreninziA
 
         OdabirNovogTreningaDialogAdapter dialogAdapter = new OdabirNovogTreningaDialogAdapter(requireActivity());
         CalendarView calendarView = view.findViewById(R.id.calendarView);
+
+
         Button btnNoviTreningDialog = view.findViewById(R.id.btnNoviTreningDialog);
         tvNemaTreningaZaPrikaz = view.findViewById(R.id.tvNemaTreningaZaPrikaz);
         long dateInMillis = calendarView.getDate();
@@ -73,8 +76,8 @@ public class NoviTreningFragment extends Fragment implements SpremljeniTreninziA
 
         tvTreninziNaDan = view.findViewById(R.id.tvTreninziNaDan);
         Date today = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.M.yyyy.", Locale.getDefault());
-        SimpleDateFormat dateFormatBaza = new SimpleDateFormat("dd-M-yyyy", Locale.getDefault());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("d.M.yyyy.", Locale.getDefault());
+        SimpleDateFormat dateFormatBaza = new SimpleDateFormat("d-M-yyyy", Locale.getDefault());
         selectedDate = dateFormatBaza.format(today);
 
       
@@ -174,7 +177,7 @@ public class NoviTreningFragment extends Fragment implements SpremljeniTreninziA
     private String convertMillisToDate(long millis) {
         // Convert millis to date string here (you can use SimpleDateFormat or other methods)
         // This is just an example, implement your conversion logic
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("d-MM-yyyy", Locale.getDefault());
         return sdf.format(new Date(millis));
     }
 

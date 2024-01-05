@@ -49,65 +49,20 @@ public class SettingsActivity extends AppCompatActivity {
 
 
         UserSingleton userSingleton = UserSingleton.getInstance();
-
-
         UserInformation userInformation = userSingleton.getUser();
-
         UserInformation userInfo = UserSingleton.getInstance().getUser();
-        if (userInfo != null) {
-             storageRef = FirebaseStorage.getInstance().getReference().child("images/" + userInformation.getProfilePicture());
-
-
-
         final Bundle bundle = getIntent().getExtras();
 
-        if (bundle != null) {
-            ImageUri = bundle.getString("savedUri");
-            Boolean BackCamera = bundle.getBoolean("isBackCamera");
-            String[] projection = new String[]{
-                    MediaStore.Images.ImageColumns._ID,
-                    MediaStore.Images.ImageColumns.DATA,
-                    MediaStore.Images.ImageColumns.BUCKET_DISPLAY_NAME,
-                    MediaStore.Images.ImageColumns.DATE_TAKEN,
-                    MediaStore.Images.ImageColumns.MIME_TYPE
-            };
-            final Cursor cursor = getContentResolver()
-                    .query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection, null,
-                            null, MediaStore.Images.ImageColumns.DATE_TAKEN + " DESC");
+        if(bundle != null) {
+            tvime.setText(userInformation.getIme());
 
-            // Put it in the image view
-            if (cursor.moveToFirst()) {
-                final ImageView imageView = findViewById(R.id.ivProfile);
-                String imageLocation = cursor.getString(1);
-                File imageFile = new File(imageLocation);
-                if (imageFile.exists()) {
-                    Bitmap originalBitmap = BitmapFactory.decodeFile(imageLocation);
-                    Bitmap rotatedBitmap = rotateBitmap(originalBitmap, BackCamera);
-                    imageView.setImageBitmap(rotatedBitmap);
-                    uploadImageToFirebase();
-                }
+        }
+            else{
+                LoadUser();
+                tvime.setText(userInformation.getIme());
+
             }
 
-        }
-// Download the image into a local file
-        try {
-            File localFile = File.createTempFile("images", ""); // Temporary file to store the image
-            storageRef.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
-                // Local file created, set it to the ImageView
-                Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                ivProfile.setImageBitmap(bitmap); // Set the downloaded image to your ImageView
-            }).addOnFailureListener(exception -> {
-                // Handle any errors
-                Log.e("FirebaseStorage", "Error downloading image: " + exception.getMessage());
-            });
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        tvime.setText(userInformation.getIme());
-
-        } else {
-
-        }
         btnUrediProfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -194,6 +149,65 @@ public class SettingsActivity extends AppCompatActivity {
                     // Perform actions like saving this URL to a database or displaying the image
                 });
             });
+        }
+    }
+    private void LoadUser()
+    {
+        UserSingleton userSingleton = UserSingleton.getInstance();
+        UserInformation userInformation = userSingleton.getUser();
+        UserInformation userInfo = UserSingleton.getInstance().getUser();
+        if (userInfo != null) {
+            storageRef = FirebaseStorage.getInstance().getReference().child("images/" + userInformation.getProfilePicture());
+
+
+
+            final Bundle bundle = getIntent().getExtras();
+
+            if (bundle != null) {
+                ImageUri = bundle.getString("savedUri");
+                Boolean BackCamera = bundle.getBoolean("isBackCamera");
+                String[] projection = new String[]{
+                        MediaStore.Images.ImageColumns._ID,
+                        MediaStore.Images.ImageColumns.DATA,
+                        MediaStore.Images.ImageColumns.BUCKET_DISPLAY_NAME,
+                        MediaStore.Images.ImageColumns.DATE_TAKEN,
+                        MediaStore.Images.ImageColumns.MIME_TYPE
+                };
+                final Cursor cursor = getContentResolver()
+                        .query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection, null,
+                                null, MediaStore.Images.ImageColumns.DATE_TAKEN + " DESC");
+
+                // Put it in the image view
+                if (cursor.moveToFirst()) {
+                    final ImageView imageView = findViewById(R.id.ivProfile);
+                    String imageLocation = cursor.getString(1);
+                    File imageFile = new File(imageLocation);
+                    if (imageFile.exists()) {
+                        Bitmap originalBitmap = BitmapFactory.decodeFile(imageLocation);
+                        Bitmap rotatedBitmap = rotateBitmap(originalBitmap, BackCamera);
+                        imageView.setImageBitmap(rotatedBitmap);
+                        uploadImageToFirebase();
+                    }
+                }
+
+            }
+// Download the image into a local file
+            try {
+                File localFile = File.createTempFile("images", ""); // Temporary file to store the image
+                storageRef.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+                    // Local file created, set it to the ImageView
+                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                    ivProfile.setImageBitmap(bitmap); // Set the downloaded image to your ImageView
+                }).addOnFailureListener(exception -> {
+                    // Handle any errors
+                    Log.e("FirebaseStorage", "Error downloading image: " + exception.getMessage());
+                });
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } else {
+
         }
     }
 }

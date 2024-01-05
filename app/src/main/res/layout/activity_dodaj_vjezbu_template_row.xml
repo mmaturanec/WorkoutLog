@@ -39,13 +39,13 @@
                     android:minWidth="170dp"
                     android:paddingStart="10dp"
                     android:paddingEnd="5dp"
+                    app:boxStrokeColor="@color/gold"
                     app:counterTextColor="@color/white"
-                    app:endIconTint="@color/white"
+                    app:cursorColor="@color/gold"
                     app:helperTextTextColor="@color/white"
                     app:hintTextColor="@color/white"
                     app:placeholderTextColor="@color/white"
                     app:prefixTextColor="@color/white"
-                    app:startIconTint="@color/white"
                     app:suffixTextColor="@color/white">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -53,11 +53,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/RadnaKilaza"
-                        android:inputType="number"
+                        android:inputType="number|numberDecimal"
                         android:textColor="@color/white"
-                        android:textColorHighlight="@color/gold"
-                        android:textColorHint="@color/white"
-                        android:textColorLink="@color/gold" />
+                        android:textColorHighlight="@color/white"
+                        android:textColorLink="@color/white" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -68,13 +67,13 @@
                     android:minWidth="170dp"
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
+                    app:boxStrokeColor="@color/gold"
                     app:counterTextColor="@color/white"
-                    app:endIconTint="@color/white"
+                    app:cursorColor="@color/gold"
                     app:helperTextTextColor="@color/white"
                     app:hintTextColor="@color/white"
                     app:placeholderTextColor="@color/white"
                     app:prefixTextColor="@color/white"
-                    app:startIconTint="@color/white"
                     app:suffixTextColor="@color/white">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -84,9 +83,8 @@
                         android:hint="@string/BrojPonavljanja"
                         android:inputType="number"
                         android:textColor="@color/white"
-                        android:textColorHighlight="@color/gold"
-                        android:textColorHint="@color/white"
-                        android:textColorLink="@color/gold" />
+                        android:textColorHighlight="@color/white"
+                        android:textColorLink="@color/white"  />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <ImageView

@@ -154,7 +154,7 @@ public class NewTemplateMain extends AppCompatActivity implements NewTemplateMai
             @Override
             public void onClick(View v) {
                 String imeTemplate = tiTemplateName.getText().toString();
-                String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                String currentDate = new SimpleDateFormat("d-MM-yyyy", Locale.getDefault()).format(new Date());
 
                 if(TextUtils.isEmpty(imeTemplate))
                 {

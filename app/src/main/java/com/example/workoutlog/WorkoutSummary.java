@@ -9,7 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class WorkoutSummary extends AppCompatActivity {
 
@@ -37,7 +40,7 @@ public class WorkoutSummary extends AppCompatActivity {
         CalculateTotalSets();
         getTotalReps();
 
-        tvUkupnoKilaze.setText(""+totalWeightLifted);
+        tvUkupnoKilaze.setText(""+formatFloat(totalWeightLifted));
         tvUkupnoSerija.setText(""+totalSetsCount);
         tvUkupnoPon.setText(""+totalRepsCount);
         tvVjPodKil.setText(getExerciseWithMaxWeight());
@@ -138,5 +141,15 @@ public class WorkoutSummary extends AppCompatActivity {
         totalRepsCount =  totalReps;
     }
 
+    public String formatFloat(float valueToFormat) {
+        // Define the desired number format
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.getDefault());
+        symbols.setDecimalSeparator(',');
+        symbols.setGroupingSeparator('.');
 
+        DecimalFormat decimalFormat = new DecimalFormat("#,##0.00", symbols);
+
+        // Format the float value according to the defined format
+        return decimalFormat.format(valueToFormat);
+    }
 }
