@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,6 +35,7 @@ public class SettingsActivity extends AppCompatActivity {
     private TextView tvPromjeniProfilnu, tvime;
     StorageReference storageRef;
     String ImageUri;
+    ProgressBar progressBarSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,22 +48,19 @@ public class SettingsActivity extends AppCompatActivity {
         ivBackSettings = findViewById(R.id.ivBackSettings);
         tvPromjeniProfilnu = findViewById(R.id.tvPromjeniProfilnu);
         tvime = findViewById(R.id.tvime);
-
+        progressBarSettings = findViewById(R.id.progressBarSettings);
 
         UserSingleton userSingleton = UserSingleton.getInstance();
         UserInformation userInformation = userSingleton.getUser();
         UserInformation userInfo = UserSingleton.getInstance().getUser();
         final Bundle bundle = getIntent().getExtras();
 
-        if(bundle != null) {
+
+
+            LoadUser();
             tvime.setText(userInformation.getIme());
 
-        }
-            else{
-                LoadUser();
-                tvime.setText(userInformation.getIme());
 
-            }
 
         btnUrediProfil.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +75,7 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intentKamera = new Intent(SettingsActivity.this, KameraActivity.class);
                 startActivity(intentKamera);
+                finish();
                 overridePendingTransition(0, 0);
             }
         });
@@ -156,6 +156,7 @@ public class SettingsActivity extends AppCompatActivity {
         UserSingleton userSingleton = UserSingleton.getInstance();
         UserInformation userInformation = userSingleton.getUser();
         UserInformation userInfo = UserSingleton.getInstance().getUser();
+        Boolean updateUser = false;
         if (userInfo != null) {
             storageRef = FirebaseStorage.getInstance().getReference().child("images/" + userInformation.getProfilePicture());
 
@@ -164,6 +165,8 @@ public class SettingsActivity extends AppCompatActivity {
             final Bundle bundle = getIntent().getExtras();
 
             if (bundle != null) {
+                 updateUser = bundle.getBoolean("updateUser");
+
                 ImageUri = bundle.getString("savedUri");
                 Boolean BackCamera = bundle.getBoolean("isBackCamera");
                 String[] projection = new String[]{
@@ -191,20 +194,32 @@ public class SettingsActivity extends AppCompatActivity {
                 }
 
             }
+
 // Download the image into a local file
-            try {
-                File localFile = File.createTempFile("images", ""); // Temporary file to store the image
-                storageRef.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
-                    // Local file created, set it to the ImageView
-                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                    ivProfile.setImageBitmap(bitmap); // Set the downloaded image to your ImageView
-                }).addOnFailureListener(exception -> {
-                    // Handle any errors
-                    Log.e("FirebaseStorage", "Error downloading image: " + exception.getMessage());
-                });
-            } catch (IOException e) {
-                e.printStackTrace();
+            if(updateUser == true)
+            {
+                progressBarSettings.setVisibility(View.GONE);
+                ivProfile.setVisibility(View.VISIBLE);
             }
+            else{
+                try {
+                    File localFile = File.createTempFile("images", ""); // Temporary file to store the image
+                    storageRef.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+                        // Local file created, set it to the ImageView
+                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                        ivProfile.setImageBitmap(bitmap); // Set the downloaded image to your ImageView
+
+                        progressBarSettings.setVisibility(View.GONE);
+                        ivProfile.setVisibility(View.VISIBLE);
+                    }).addOnFailureListener(exception -> {
+                        // Handle any errors
+                        Log.e("FirebaseStorage", "Error downloading image: " + exception.getMessage());
+                    });
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
 
         } else {
 

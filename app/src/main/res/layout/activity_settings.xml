@@ -7,53 +7,55 @@
     android:background="@color/black"
     tools:context=".SettingsActivity">
 
+    <ProgressBar
+        android:id="@+id/progressBarSettings"
+        android:layout_width="87dp"
+        android:layout_height="94dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.249" />
+
     <Button
         android:id="@+id/btnOdjava"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
         android:backgroundTint="@color/gold"
-        android:text="Odjava"
+        android:text="@string/Odjava"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.935" />
-
-    <ImageView
-        android:id="@+id/ivProfile"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
-        android:layout_marginTop="140dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/no_profile_picture"
-        tools:srcCompat="@mipmap/no_profile_picture" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnUrediProfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
+        android:layout_marginBottom="115dp"
         android:backgroundTint="@color/gold"
         android:text="@string/UrediProfil"
         android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/btnOdjava"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPromjeniProfilnu" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tvPromjeniProfilnu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="180dp"
         android:text="@string/ProjeniProfilnu"
         android:textColor="@color/gold"
+        app:layout_constraintBottom_toTopOf="@+id/btnUrediProfil"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivProfile" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
     <ImageView
         android:id="@+id/ivBackSettings"
@@ -67,14 +69,16 @@
         app:tint="@color/red" />
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="221dp"
         android:layout_height="39dp"
         android:layout_marginStart="95dp"
+        android:layout_marginTop="101dp"
         android:layout_marginEnd="95dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/ivProfile"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textView18"
@@ -93,6 +97,19 @@
             android:paddingStart="2dp"
             android:text="TextView"
             android:textColor="@color/gold" />
+
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ivProfile"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:srcCompat="@mipmap/no_profile_picture"
+        tools:srcCompat="@mipmap/no_profile_picture"
+        android:visibility="gone"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

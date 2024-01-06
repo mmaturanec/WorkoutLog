@@ -13,10 +13,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -36,10 +38,13 @@ public class NewTemplateMain extends AppCompatActivity implements NewTemplateMai
     private Button btnDodajVjezbu;
     private Button btnSpremiTrening;
     private NewTemplateMainAdapter adapterRV;
+    private TextInputLayout TILTemplate;
     private ImageView ivInfoButtonTemplate;
     private EditText tiTemplateName;
     private ImageView ivOdbaciTemplate;
     private String PreuzetiDatum;
+    private ProgressBar progressBarTemplate;
+    private  RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +53,13 @@ public class NewTemplateMain extends AppCompatActivity implements NewTemplateMai
         lexercise = (ArrayList<Exercise>) ExerciseSingleton.getInstance().getExercises();
 
         btnDodajVjezbu = findViewById(R.id.btnDodajVjezbu);
-        RecyclerView recyclerView = findViewById(R.id.rvNewTemplateMain);
+        recyclerView = findViewById(R.id.rvNewTemplateMain);
         ivInfoButtonTemplate = findViewById(R.id.ivInfoButtonTemplate);
         btnSpremiTrening = findViewById(R.id.btnSpremiTrening);
         tiTemplateName = findViewById(R.id.tiTemplateName);
         PreuzetiDatum = ExerciseSingleton.getInstance().getPreuzetiDatum();
+        progressBarTemplate = findViewById(R.id.progressBarTemplate);
+        TILTemplate = findViewById(R.id.TILTemplate);
 
 
         final Bundle bundle = getIntent().getExtras();
@@ -153,6 +160,16 @@ public class NewTemplateMain extends AppCompatActivity implements NewTemplateMai
         btnSpremiTrening.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                btnSpremiTrening.setVisibility(View.GONE);
+                btnDodajVjezbu.setVisibility(View.GONE);
+                ivInfoButtonTemplate.setVisibility(View.GONE);
+                TILTemplate.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.GONE);
+                ivOdbaciTemplate.setVisibility(View.GONE);
+                progressBarTemplate.setVisibility(View.VISIBLE);
+
+
                 String imeTemplate = tiTemplateName.getText().toString();
                 String currentDate = new SimpleDateFormat("d-MM-yyyy", Locale.getDefault()).format(new Date());
 

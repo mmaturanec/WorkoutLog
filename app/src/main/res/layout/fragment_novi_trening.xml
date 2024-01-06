@@ -36,7 +36,8 @@
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvHistory" />
 
     <TextView
         android:id="@+id/tvTreninziNaDan"
@@ -51,9 +52,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvHistory"
-        android:layout_width="399dp"
-        android:layout_height="293dp"
-        android:layout_marginTop="45dp"
+        android:layout_width="404dp"
+        android:layout_height="306dp"
+        android:layout_marginTop="44dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />

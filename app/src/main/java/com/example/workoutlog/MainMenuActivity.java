@@ -2,16 +2,13 @@ package com.example.workoutlog;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.ProgressBar;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,6 +25,7 @@ public class MainMenuActivity extends AppCompatActivity  {
     private ViewPager2 viewPager2;
     private MyViewPagerAdapter myViewPagerAdapter;
     private ImageView ivSettings, infoButtonMainMenu;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +38,7 @@ public class MainMenuActivity extends AppCompatActivity  {
         viewPager2.setAdapter(myViewPagerAdapter);
         ivSettings = findViewById(R.id.ivSettings);
         infoButtonMainMenu = findViewById(R.id.infoButtonMainMenu);
+        progressBar = findViewById(R.id.progressBarTemplate);
         int initialFragmentPosition = getIntent().getIntExtra("INITIAL_FRAGMENT", 0);
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -61,6 +60,12 @@ public class MainMenuActivity extends AppCompatActivity  {
                                 UserInformation userInfo = snapshot.getValue(UserInformation.class);
 
                                 UserSingleton.getInstance().setUser(userInfo);
+
+                                progressBar.setVisibility(View.GONE);
+                                ivSettings.setVisibility(View.VISIBLE);
+                                infoButtonMainMenu.setVisibility(View.VISIBLE);
+                                viewPager2.setVisibility(View.VISIBLE);
+
                             }
 
                         }
