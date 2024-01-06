@@ -164,6 +164,7 @@ public class HistoryFragment extends Fragment implements SpremljeniTreninziAdapt
     public void onPositiveButtonClick(int position) {
         String nodeId = exerciseTemplates.get(position).getNodeId();
         deleteNodeFromDatabase(nodeId);
+        adapter.notifyDataSetChanged();
         fetchExerciseTemplatesFromFirebase();
     }
 
