@@ -117,11 +117,10 @@
             android:id="@+id/etPonovnoUnesiteLozinku"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="hint"
             android:inputType="textPassword"
             android:textColor="@color/white"
             android:textColorHighlight="@color/white"
-            android:textColorLink="@color/white"  />
+            android:textColorLink="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
