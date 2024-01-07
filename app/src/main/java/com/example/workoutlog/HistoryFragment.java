@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,10 +60,12 @@ public class HistoryFragment extends Fragment implements SpremljeniTreninziAdapt
         tvNemaTreningaHistory = view.findViewById(R.id.tvNemaTreningaHistory);
         etSearchHistory = view.findViewById(R.id.etSearchHistory);
         recyclerView = view.findViewById(R.id.rvHistory);
+
+        fetchExerciseTemplatesFromFirebase();
+
         adapter = new HistoryRVAdapter(getContext(), exerciseTemplates, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        fetchExerciseTemplatesFromFirebase();
 
         etSearchHistory.addTextChangedListener(new TextWatcher() {
             @Override
@@ -84,6 +87,9 @@ public class HistoryFragment extends Fragment implements SpremljeniTreninziAdapt
         iwSortHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+
                 if(exerciseTemplates.isEmpty())
                 {
                     tvNemaTreningaHistory.setVisibility(View.VISIBLE);
@@ -93,6 +99,9 @@ public class HistoryFragment extends Fragment implements SpremljeniTreninziAdapt
                     tvNemaTreningaHistory.setVisibility(View.GONE);
                     recyclerView.setVisibility(View.VISIBLE);
                     Collections.reverse(exerciseTemplates);
+                    adapter = new HistoryRVAdapter(getContext(), exerciseTemplates, HistoryFragment.this);
+                    recyclerView.setAdapter(adapter);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                     adapter.notifyDataSetChanged();
                 }
 
@@ -119,7 +128,16 @@ public class HistoryFragment extends Fragment implements SpremljeniTreninziAdapt
                         exerciseTemplates.add(exerciseTemplate);
                     }
                 }
-                sortExerciseTemplatesByDate();
+
+                if (!exerciseTemplates.isEmpty()) {
+                    sortExerciseTemplatesByDate();
+                    adapter = new HistoryRVAdapter(getContext(), exerciseTemplates, HistoryFragment.this);
+                    recyclerView.setAdapter(adapter);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                } else {
+                    // Handle the case when exerciseTemplates is empty
+                    // Show an appropriate message or perform any necessary action
+                }
                 adapter.notifyDataSetChanged(); // Notify the adapter that the data has changed
             }
 

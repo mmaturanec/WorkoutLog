@@ -14,12 +14,14 @@ import java.util.ArrayList;
 
 public class HistoryRVAdapter extends RecyclerView.Adapter<HistoryRVAdapter.MyViewHolder>{
     Context context;
-    ArrayList<ExerciseTemplate> lexercises;
+    ArrayList<ExerciseTemplate> originalExercises; // Maintain the original list
+    ArrayList<ExerciseTemplate> filteredExercises;
     private final SpremljeniTreninziAdapterInterface recyclerViewInterface;
 
     public HistoryRVAdapter(Context context, ArrayList<ExerciseTemplate> lexercises, SpremljeniTreninziAdapterInterface recyclerViewInterface) {
         this.context = context;
-        this.lexercises = lexercises;
+        this.originalExercises = new ArrayList<>(lexercises); // Save the original list
+        this.filteredExercises = new ArrayList<>(lexercises); // Initialize filtered list with the same content
         this.recyclerViewInterface = recyclerViewInterface;
     }
 
@@ -34,14 +36,13 @@ public class HistoryRVAdapter extends RecyclerView.Adapter<HistoryRVAdapter.MyVi
 
     @Override
     public void onBindViewHolder(@NonNull HistoryRVAdapter.MyViewHolder holder, int position) {
-        holder.tvHistoryName.setText(lexercises.get(position).getTemplateName());
-        holder.tvHistoryDate.setText(convertDateFormat(lexercises.get(position).getDate()));
-
+        holder.tvHistoryName.setText(filteredExercises.get(position).getTemplateName());
+        holder.tvHistoryDate.setText(convertDateFormat(filteredExercises.get(position).getDate()));
     }
 
     @Override
     public int getItemCount() {
-        return lexercises.size();
+        return filteredExercises.size();
     }
 
     public class MyViewHolder extends  RecyclerView.ViewHolder{
@@ -58,7 +59,10 @@ public class HistoryRVAdapter extends RecyclerView.Adapter<HistoryRVAdapter.MyVi
                         int pos = getAdapterPosition();
 
                         if (pos != RecyclerView.NO_POSITION) {
-                            recyclerViewInterface.onItemClick(pos); // Assuming you have a method for edit click in the interface
+                            // Fetch item from filtered list based on the clicked position
+                            ExerciseTemplate clickedExercise = filteredExercises.get(pos);
+                            int originalPos = originalExercises.indexOf(clickedExercise);
+                            recyclerViewInterface.onItemClick(originalPos);
                         }
                     }
                 }
@@ -71,13 +75,17 @@ public class HistoryRVAdapter extends RecyclerView.Adapter<HistoryRVAdapter.MyVi
                         int pos = getAdapterPosition();
 
                         if (pos != RecyclerView.NO_POSITION) {
-                            recyclerViewInterface.onItemLongclick(pos); // Assuming you have a method for long click deletion in the interface
+                            ExerciseTemplate clickedExercise = filteredExercises.get(pos);
+                            int originalPos = originalExercises.indexOf(clickedExercise);
+                            recyclerViewInterface.onItemLongclick(originalPos);
+                            // Update filtered list and notify adapter
+                           // filteredExercises.remove(pos);
                             notifyItemRemoved(pos);
-                            notifyItemRangeChanged(pos, getItemCount()); // Notify adapter of data change
-                            return true; // Return true to indicate the long click has been consumed
+                            notifyItemRangeChanged(pos, getItemCount());
+                            return true;
                         }
                     }
-                    return false; // Return false if the long click action was not handled
+                    return false;
                 }
             });
         }
@@ -88,7 +96,7 @@ public class HistoryRVAdapter extends RecyclerView.Adapter<HistoryRVAdapter.MyVi
         return modifiedDate;
     }
     public void filterList(ArrayList<ExerciseTemplate> filteredList) {
-        lexercises = filteredList;
+        filteredExercises = filteredList;
         notifyDataSetChanged();
     }
 
