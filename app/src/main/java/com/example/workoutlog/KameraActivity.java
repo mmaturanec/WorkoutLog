@@ -143,7 +143,6 @@ public class KameraActivity extends AppCompatActivity {
                                 Uri savedUri = Uri.fromFile(photoFile);
                                 if(Type.equals("setProfilePicture"))
                                 {
-
                                 Intent intentPostavljanjeProfila = new Intent(getApplicationContext(), PostavljanjeProfilaActivity.class);
                                 intentPostavljanjeProfila.putExtra("savedUri", savedUri.toString());
                                 intentPostavljanjeProfila.putExtra("isBackCamera", isBackCamera);
@@ -152,8 +151,9 @@ public class KameraActivity extends AppCompatActivity {
                                 startActivity(intentPostavljanjeProfila);
                                 }
                                 else{
+
                                     Intent intentPromjeniSliku = new Intent(getApplicationContext(), SettingsActivity.class);
-                                    intentPromjeniSliku.putExtra("savedUri", savedUri.toString());
+                                    //intentPromjeniSliku.putExtra("savedUri", savedUri.toString());
                                     intentPromjeniSliku.putExtra("isBackCamera", isBackCamera);
                                     intentPromjeniSliku.putExtra("updateUser", true);
                                     startActivity(intentPromjeniSliku);
@@ -287,10 +287,26 @@ public class KameraActivity extends AppCompatActivity {
         if (resultCode == Activity.RESULT_OK && requestCode == PICK_IMAGE) {
             // Handle the selected image URI here
             Uri imageUri = data.getData();
+            if(Type.equals("setProfilePicture"))
+            {
+                Log.d("img", "uslo je u if");
+                Intent intentPromjeniSliku = new Intent(getApplicationContext(), PostavljanjeProfilaActivity.class);
+                intentPromjeniSliku.putExtra("savedUri", imageUri.toString());
+                intentPromjeniSliku.putExtra("isBackCamera", isBackCamera);
+                intentPromjeniSliku.putExtra("ime", Ime);
+                intentPromjeniSliku.putExtra("prezime", Prezime);
+                intentPromjeniSliku.putExtra("gallery", "gallery");
+                startActivity(intentPromjeniSliku);
+            }
+            else{
+
             Intent intentPromjeniSliku = new Intent(getApplicationContext(), SettingsActivity.class);
             intentPromjeniSliku.putExtra("savedUri", imageUri.toString());
+            intentPromjeniSliku.putExtra("updateUser", true);
             intentPromjeniSliku.putExtra("isBackCamera", isBackCamera);
             startActivity(intentPromjeniSliku);
+            }
+
         }
     }
 }

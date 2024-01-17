@@ -9,8 +9,10 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +29,7 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -168,6 +171,8 @@ public class SettingsActivity extends AppCompatActivity {
                  updateUser = bundle.getBoolean("updateUser");
 
                 ImageUri = bundle.getString("savedUri");
+                if(TextUtils.isEmpty(ImageUri))
+                {
                 Boolean BackCamera = bundle.getBoolean("isBackCamera");
                 String[] projection = new String[]{
                         MediaStore.Images.ImageColumns._ID,
@@ -193,6 +198,19 @@ public class SettingsActivity extends AppCompatActivity {
                     }
                 }
 
+            }
+            else{
+                Uri UriFromBundle = Uri.parse(ImageUri);
+                    try {
+                        InputStream inputStream = getContentResolver().openInputStream(UriFromBundle);
+                        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                        Bitmap rotatedBitmap = rotateBitmap(bitmap, true);
+                        ivProfile.setImageBitmap(rotatedBitmap);
+                        uploadImageToFirebase();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+            }
             }
 
 // Download the image into a local file

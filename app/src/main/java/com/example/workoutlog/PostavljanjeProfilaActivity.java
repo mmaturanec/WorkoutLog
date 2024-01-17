@@ -35,6 +35,8 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class PostavljanjeProfilaActivity extends AppCompatActivity {
 
@@ -70,7 +72,29 @@ public class PostavljanjeProfilaActivity extends AppCompatActivity {
                 etOdaberiPrezime.setText(prezime);
             }
             ImageUri = bundle.getString("savedUri");
+
+            String updateFromGallery = "";
+            if(bundle.containsKey("gallery"))
+            {
+                updateFromGallery = bundle.getString("gallery");
+
+            }
             Boolean BackCamera = bundle.getBoolean("isBackCamera");
+            if(updateFromGallery.equals("gallery"))
+            {
+                Uri UriFromBundle = Uri.parse(ImageUri);
+                try {
+                    InputStream inputStream = getContentResolver().openInputStream(UriFromBundle);
+                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                    Bitmap rotatedBitmap = rotateBitmap(bitmap, false);
+                    ivOdaberiProfilnu.setImageBitmap(rotatedBitmap);
+                    uploadImageToFirebase();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            else{
+
             String[] projection = new String[]{
                     MediaStore.Images.ImageColumns._ID,
                     MediaStore.Images.ImageColumns.DATA,
@@ -93,6 +117,8 @@ public class PostavljanjeProfilaActivity extends AppCompatActivity {
                     imageView.setImageBitmap(rotatedBitmap);
                 }
             }
+            }
+
             ivAddOdaberiProfilnu.setVisibility(View.GONE);
 
         }

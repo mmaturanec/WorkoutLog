@@ -87,7 +87,7 @@
     <string name="ResetEmailSucces">Email za resetiranje lozinke uspješno poslan!</string>
     <string name="ResetEmailFail">Unesite ispravan e-mail</string>
     <string name="ZaboravljenaLozinka">Zaboravljena lozinka</string>
-    <string name="UnesiteEmailZaReset">Unesite E-mail adresu na koju želite poslati E-mail za resetiranje lozinke:</string>
+    <string name="UnesiteEmailZaReset">Unesite E-mail adresu na koju želite poslati E-mail za resetiranje lozinke.</string>
     <string name="Posalji">Pošalji</string>
     <string name="UnesiteEmail">Unesite E-mail</string>
     <string name="NemaSpremljenihPredlozaka">Nema spremljenih predložaka</string>

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/gold"
+    android:background="@color/gray"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
@@ -22,32 +22,33 @@
             android:gravity="center"
             android:paddingTop="10dp"
             android:text="@string/UnesiteEmailZaReset"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="15sp" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/gray"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
-            app:boxStrokeColor="@color/gold"
-            app:counterTextColor="@color/white"
-            app:cursorColor="@color/gold"
-            app:helperTextTextColor="@color/white"
-            app:hintTextColor="@color/white"
-            app:placeholderTextColor="@color/white"
-            app:prefixTextColor="@color/white"
-            app:suffixTextColor="@color/white">
+            app:boxStrokeColor="@color/black"
+            app:counterTextColor="@color/black"
+            app:cursorColor="@color/black"
+            app:helperTextTextColor="@color/black"
+            app:hintTextColor="@color/black"
+            app:placeholderTextColor="@color/black"
+            app:prefixTextColor="@color/black"
+            app:suffixTextColor="@color/black">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etEmailReset"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/Email"
-                android:textColor="@color/white"
-                android:textColorHighlight="@color/white"
-                android:textColorHint="@color/white"
-                android:textColorLink="@color/white" />
+                android:textColor="@color/black"
+                android:textColorHighlight="@color/black"
+                android:textColorHint="@color/black"
+                android:textColorLink="@color/black" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
@@ -61,9 +62,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/red"
                 android:text="@string/Odustani"
-                android:textColor="@color/black" />
+                android:textColor="@color/white" />
 
             <Button
                 android:id="@+id/btnPosaljiReset"
@@ -71,9 +72,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:backgroundTint="@color/red"
+                android:backgroundTint="@color/gold"
                 android:text="@string/Posalji"
-                android:textColor="@color/white" />
+                android:textColor="@color/black" />
         </LinearLayout>
 
     </LinearLayout>

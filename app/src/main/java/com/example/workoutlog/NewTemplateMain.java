@@ -161,13 +161,7 @@ public class NewTemplateMain extends AppCompatActivity implements NewTemplateMai
             @Override
             public void onClick(View v) {
 
-                btnSpremiTrening.setVisibility(View.GONE);
-                btnDodajVjezbu.setVisibility(View.GONE);
-                ivInfoButtonTemplate.setVisibility(View.GONE);
-                TILTemplate.setVisibility(View.GONE);
-                recyclerView.setVisibility(View.GONE);
-                ivOdbaciTemplate.setVisibility(View.GONE);
-                progressBarTemplate.setVisibility(View.VISIBLE);
+
 
 
                 String imeTemplate = tiTemplateName.getText().toString();
@@ -187,7 +181,13 @@ public class NewTemplateMain extends AppCompatActivity implements NewTemplateMai
                 {
                     if (currentUser != null) {
                         String userUid = currentUser.getUid();
-
+                        btnSpremiTrening.setVisibility(View.GONE);
+                        btnDodajVjezbu.setVisibility(View.GONE);
+                        ivInfoButtonTemplate.setVisibility(View.GONE);
+                        TILTemplate.setVisibility(View.GONE);
+                        recyclerView.setVisibility(View.GONE);
+                        ivOdbaciTemplate.setVisibility(View.GONE);
+                        progressBarTemplate.setVisibility(View.VISIBLE);
                         DatabaseReference userExerciseTemplateRef = FirebaseDatabase.getInstance().getReference()
                                 .child("user_exercise_history")
                                 .child(userUid);
@@ -230,6 +230,13 @@ public class NewTemplateMain extends AppCompatActivity implements NewTemplateMai
                 }
                 else if(ExerciseSingleton.getInstance().getEditingTemplate() == true)
                 {
+                    btnSpremiTrening.setVisibility(View.GONE);
+                    btnDodajVjezbu.setVisibility(View.GONE);
+                    ivInfoButtonTemplate.setVisibility(View.GONE);
+                    TILTemplate.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.GONE);
+                    ivOdbaciTemplate.setVisibility(View.GONE);
+                    progressBarTemplate.setVisibility(View.VISIBLE);
                     ExerciseTemplate exerciseTemplate = new ExerciseTemplate(imeTemplate,lexercise, currentDate);
                     String nodeId = ExerciseSingleton.getInstance().getNodeId();
                     updateExerciseTemplatesInDatabase(exerciseTemplate, nodeId);
@@ -243,6 +250,13 @@ public class NewTemplateMain extends AppCompatActivity implements NewTemplateMai
                 }
                 else if(ExerciseSingleton.getInstance().getEditingWorkout())
                 {
+                    btnSpremiTrening.setVisibility(View.GONE);
+                    btnDodajVjezbu.setVisibility(View.GONE);
+                    ivInfoButtonTemplate.setVisibility(View.GONE);
+                    TILTemplate.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.GONE);
+                    ivOdbaciTemplate.setVisibility(View.GONE);
+                    progressBarTemplate.setVisibility(View.VISIBLE);
                     ExerciseTemplate exerciseTemplate = new ExerciseTemplate(imeTemplate, lexercise, ExerciseSingleton.getInstance().getPreuzetiDatum());
                     String nodeId = ExerciseSingleton.getInstance().getNodeId();
                     updateExerciseWorkoutInDatabase(exerciseTemplate, nodeId);
@@ -256,6 +270,13 @@ public class NewTemplateMain extends AppCompatActivity implements NewTemplateMai
                 }
                     else{
                         if (currentUser != null) {
+                            btnSpremiTrening.setVisibility(View.GONE);
+                            btnDodajVjezbu.setVisibility(View.GONE);
+                            ivInfoButtonTemplate.setVisibility(View.GONE);
+                            TILTemplate.setVisibility(View.GONE);
+                            recyclerView.setVisibility(View.GONE);
+                            ivOdbaciTemplate.setVisibility(View.GONE);
+                            progressBarTemplate.setVisibility(View.VISIBLE);
                             String userUid = currentUser.getUid();
 
                             DatabaseReference userExerciseTemplateRef = FirebaseDatabase.getInstance().getReference()
